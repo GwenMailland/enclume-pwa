@@ -1,0 +1,107 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://enclume.local/schemas/contenus/classes.schema.json",
+  "title": "contenus/classes.json — classes communes, avancées et gabarits cachés",
+  "description": "Les gabarits `cachee` doivent porter `conditions` et `conditions_tirees`. Champs listés requis ; champs supplémentaires tolérés.",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "entrees"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "$ref": "../commun.schema.json#/$defs/schema_version"
+    },
+    "entrees": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "nom",
+          "rang",
+          "categorie",
+          "description",
+          "competences"
+        ],
+        "properties": {
+          "id": {
+            "$ref": "../commun.schema.json#/$defs/id_cls"
+          },
+          "nom": {
+            "type": "string",
+            "minLength": 1
+          },
+          "rang": {
+            "$ref": "../commun.schema.json#/$defs/rang_classe"
+          },
+          "categorie": {
+            "enum": [
+              "commune",
+              "avancee",
+              "cachee"
+            ]
+          },
+          "description": {
+            "type": "string",
+            "minLength": 1
+          },
+          "prerequis": {
+            "type": "object",
+            "description": "Classes connues : niveau, stats, maître…"
+          },
+          "conditions": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            },
+            "description": "Gabarits cachés : pool de conditions secrètes."
+          },
+          "conditions_tirees": {
+            "type": "integer",
+            "minimum": 1,
+            "description": "Nombre de conditions tirées dans le pool (3-4)."
+          },
+          "passifs": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "bonus": {
+            "$ref": "../commun.schema.json#/$defs/bonus"
+          },
+          "competences": {
+            "type": "array",
+            "items": {
+              "$ref": "../commun.schema.json#/$defs/id_cmp"
+            }
+          },
+          "evolue_vers": {
+            "type": "array",
+            "items": {
+              "$ref": "../commun.schema.json#/$defs/id_cls"
+            }
+          }
+        },
+        "if": {
+          "properties": {
+            "categorie": {
+              "const": "cachee"
+            }
+          }
+        },
+        "then": {
+          "required": [
+            "conditions",
+            "conditions_tirees"
+          ]
+        }
+      }
+    }
+  }
+}

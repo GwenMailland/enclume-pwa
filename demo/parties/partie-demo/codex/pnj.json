@@ -1,0 +1,258 @@
+{
+  "schema_version": 1,
+  "entrees": [
+    {
+      "id": "pnj_orvan_braisier_a1c4",
+      "nom": "Orvan Braisier",
+      "connu": true,
+      "role": "maître forgeron",
+      "metier": "forgeron",
+      "culture": "ardannais",
+      "lieu": "lieu_hautebrande_6d02",
+      "faction": "fac_cercle_des_cendres_2a71",
+      "statut": "mentor",
+      "affinite": 65,
+      "vivant": true,
+      "apparence": "Soixante ans, avant-bras couturés de brûlures, une barbe grise roussie au bout.",
+      "trait": "bourru mais juste",
+      "desir": "Voir un élève dépasser son propre maître",
+      "peur": "Que son savoir meure avec lui",
+      "voix": "Phrases courtes. Appelle Aldric « gamin ». Jure par l'enclume.",
+      "souvenirs": [
+        {
+          "jour": 1,
+          "texte": "Aldric a sauvé l'atelier quand la poutre est tombée."
+        },
+        {
+          "jour": 25,
+          "texte": "La Lame chantante a fait taire tout le Cercle."
+        },
+        {
+          "jour": 36,
+          "texte": "Aldric a juré le Serment de l'Enclume devant lui."
+        },
+        {
+          "jour": 39,
+          "texte": "Il a tenu la pince pendant la naissance de Cendre-Veine."
+        }
+      ],
+      "dernier_echange": {
+        "jour": 39,
+        "texte": "« Celle-là, gamin, elle te survivra. Fais en sorte de la mériter. »"
+      },
+      "liens": [
+        {
+          "cible": "pnj_maelis_tisserand_3f9a",
+          "nature": "vieille amie"
+        },
+        {
+          "cible": "fac_cercle_des_cendres_2a71",
+          "nature": "ancien doyen"
+        }
+      ],
+      "premiere_rencontre_jour": 1,
+      "secret": "A été l'apprenti de l'apprenti de Hauldren Sans-Flamme ; connaît le chemin de la Forge-sans-Flamme mais l'a juré secret."
+    },
+    {
+      "id": "pnj_maelis_tisserand_3f9a",
+      "nom": "Maëlis Tisserand",
+      "connu": true,
+      "role": "intendante de Hautebrande",
+      "metier": "marchande de fer",
+      "culture": "ardannais",
+      "lieu": "lieu_hautebrande_6d02",
+      "statut": "allie",
+      "affinite": 40,
+      "vivant": true,
+      "apparence": "Quarante ans, tablier de cuir, un crayon toujours derrière l'oreille.",
+      "trait": "méthodique",
+      "desir": "Une maison qu'aucun seigneur ne peut lui reprendre",
+      "peur": "La faillite",
+      "voix": "Compte tout à voix haute. Dit « voyons voir » avant chaque décision.",
+      "souvenirs": [
+        {
+          "jour": 7,
+          "texte": "Aldric a obtenu du fer à crédit et l'a remboursé en avance."
+        },
+        {
+          "jour": 35,
+          "texte": "Il lui a confié l'intendance de Hautebrande."
+        }
+      ],
+      "dernier_echange": {
+        "jour": 41,
+        "texte": "« Voyons voir… trois jours pour la palissade, si personne ne tombe malade. »"
+      },
+      "premiere_rencontre_jour": 6
+    },
+    {
+      "id": "pnj_dorran_ase_1c2e",
+      "nom": "Dorran Asé",
+      "connu": true,
+      "role": "contrebandier",
+      "culture": "salant",
+      "lieu": "lieu_port_sel_51ac",
+      "faction": "fac_marees_noires_77b0",
+      "statut": "connaissance",
+      "affinite": 10,
+      "vivant": true,
+      "apparence": "Maigre, tatouages de marées sur les poignets, une hache ébréchée.",
+      "trait": "aux abois",
+      "desir": "Rembourser sa dette aux Marées Noires",
+      "peur": "La pendaison",
+      "voix": "Phrases courtes, jure par les marées.",
+      "souvenirs": [
+        {
+          "jour": 41,
+          "texte": "Tu l'as épargné au lieu de le livrer à la garde."
+        }
+      ],
+      "dernier_echange": {
+        "jour": 41,
+        "texte": "« Par les marées… je te dois une vie, forgeron. L'acheteur, cherche-le au Héron Gris. »"
+      },
+      "premiere_rencontre_jour": 40
+    },
+    {
+      "id": "pnj_sevrine_cade_5b07",
+      "nom": "Sévrine Cade",
+      "connu": true,
+      "role": "capitaine de la milice de Hautebrande",
+      "metier": "ancienne mercenaire",
+      "culture": "salant",
+      "lieu": "lieu_hautebrande_6d02",
+      "statut": "allie",
+      "affinite": 30,
+      "vivant": true,
+      "apparence": "Cheveux ras, cicatrice en travers du menton, cotte de mailles rapiécée.",
+      "trait": "loyale mais cynique",
+      "desir": "Un endroit où ne plus fuir",
+      "peur": "Revoir ses hommes mourir pour rien",
+      "voix": "Parle en ordres. Ponctue de « compris ? ».",
+      "souvenirs": [
+        {
+          "jour": 34,
+          "texte": "Aldric a chassé les pillards de Hautebrande à ses côtés."
+        }
+      ],
+      "dernier_echange": {
+        "jour": 40,
+        "texte": "« Douze lances et une palissade à moitié faite. Compris ? On ne tient pas un siège. »"
+      },
+      "premiere_rencontre_jour": 34
+    },
+    {
+      "id": "pnj_ilan_corbelet_9e2d",
+      "nom": "Ilan Corbelet",
+      "connu": true,
+      "role": "érudit de l'Académie du Verre",
+      "culture": "ardannais",
+      "lieu": "lieu_vel_ardhan_08aa",
+      "statut": "ami",
+      "affinite": 25,
+      "vivant": true,
+      "apparence": "Jeune, lunettes de verre fumé, doigts tachés d'encre bleue.",
+      "trait": "curieux jusqu'à l'imprudence",
+      "desir": "Comprendre ce qu'est le Système",
+      "peur": "Le ridicule devant ses pairs",
+      "voix": "Parle vite, digresse, cite des auteurs qui n'existent peut-être pas.",
+      "souvenirs": [
+        {
+          "jour": 11,
+          "texte": "Aldric a appris Trait de braise en une seule leçon."
+        },
+        {
+          "jour": 32,
+          "texte": "Aldric lui a rapporté un éclat du Gardien de vitre."
+        }
+      ],
+      "dernier_echange": {
+        "jour": 32,
+        "texte": "« Fascinant ! Le verre se souvient. Le verre SE SOUVIENT, Aldric ! »"
+      },
+      "premiere_rencontre_jour": 9
+    },
+    {
+      "id": "pnj_varek_ombrelune_44f0",
+      "nom": "Varek Ombrelune",
+      "connu": true,
+      "role": "chasseur de brèches",
+      "culture": "salant",
+      "lieu": "lieu_port_sel_51ac",
+      "faction": "fac_compagnie_du_sel_8d3e",
+      "statut": "rival",
+      "affinite": -20,
+      "vivant": true,
+      "apparence": "Grand, manteau gris de la Compagnie, une arbalète à double corde.",
+      "trait": "ambitieux",
+      "desir": "Atteindre le rang C avant ses trente ans",
+      "peur": "Être oublié",
+      "voix": "Ironique, vouvoie pour mieux mépriser.",
+      "souvenirs": [
+        {
+          "jour": 13,
+          "texte": "Il t'a soufflé le contrat de la Compagnie."
+        },
+        {
+          "jour": 31,
+          "texte": "Tu as fermé le Gouffre avant lui."
+        }
+      ],
+      "dernier_echange": {
+        "jour": 33,
+        "texte": "« Félicitations, forgeron. Profitez-en : la prochaine brèche est à moi. »"
+      },
+      "premiere_rencontre_jour": 13,
+      "secret": "Renseigne en secret le Cercle des Cendres sur les achats de la Compagnie."
+    },
+    {
+      "id": "pnj_tessa_grisfer_c3a8",
+      "nom": "Tessa Grisfer",
+      "connu": true,
+      "role": "marchande ambulante",
+      "culture": "ardannais",
+      "lieu": "lieu_gouffre_de_vitre_e7a9",
+      "statut": "amour",
+      "affinite": 55,
+      "vivant": false,
+      "apparence": "Rousse, une charrette peinte en vert, un rire qu'on entend de loin.",
+      "trait": "téméraire",
+      "desir": "Voir la mer",
+      "peur": "Les endroits clos",
+      "voix": "Tutoie tout le monde, surnomme Aldric « l'Enclume ».",
+      "souvenirs": [
+        {
+          "jour": 18,
+          "texte": "Aldric l'a escortée jusqu'au Gouffre."
+        },
+        {
+          "jour": 22,
+          "texte": "Elle l'a vu revenir d'entre les morts."
+        },
+        {
+          "jour": 31,
+          "texte": "Elle est morte dans le piège de verre de la brèche."
+        }
+      ],
+      "dernier_echange": {
+        "jour": 31,
+        "texte": "« Ferme-la, l'Enclume. Ferme cette brèche… »"
+      },
+      "premiere_rencontre_jour": 14
+    },
+    {
+      "id": "pnj_hauldren_sans_flamme_0bb1",
+      "nom": "Hauldren Sans-Flamme",
+      "connu": false,
+      "role": "maître forgeron légendaire",
+      "culture": "ancien",
+      "lieu": "lieu_forge_sans_flamme_f001",
+      "statut": "inconnu",
+      "affinite": 0,
+      "vivant": true,
+      "voix": "Ne parle qu'en questions.",
+      "souvenirs": [],
+      "secret": "Forgeron de l'âge d'avant le Système. Sa reconnaissance est une condition de la classe cachée Lame de l'Enclume Ardente."
+    }
+  ]
+}

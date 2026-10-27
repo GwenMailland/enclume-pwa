@@ -1,0 +1,40 @@
+{
+  "schema_version": 1,
+  "choix": [
+    {
+      "id": "dst_serment_enclume_4c1b",
+      "type": "serment",
+      "titre": "Le Serment de l'Enclume",
+      "contexte": "La Compagnie du Sel offrait un contrat d'armes qui aurait payé Hautebrande dix fois. Le Cercle exigeait un serment.",
+      "choix": "Tu as juré devant le Cercle des Cendres de ne jamais forger pour qui achète des brèches.",
+      "alternatives": [
+        "Signer le contrat d'armes de la Compagnie du Sel",
+        "Refuser les deux et rester libre"
+      ],
+      "date": {
+        "annee": 1,
+        "saison": "automne",
+        "jour": 36,
+        "moment": "crepuscule"
+      },
+      "session": 8,
+      "ouvre": [
+        "allegeance:fac_cercle_des_cendres_2a71",
+        "rang:cercle_jure"
+      ],
+      "verrouille": [
+        "allegeance:fac_compagnie_du_sel_8d3e",
+        "contrat:armes_compagnie_du_sel"
+      ],
+      "refs": [
+        "fac_cercle_des_cendres_2a71",
+        "fac_compagnie_du_sel_8d3e",
+        "pnj_orvan_braisier_a1c4"
+      ]
+    }
+  ],
+  "verrous": [
+    "allegeance:fac_compagnie_du_sel_8d3e",
+    "contrat:armes_compagnie_du_sel"
+  ]
+}

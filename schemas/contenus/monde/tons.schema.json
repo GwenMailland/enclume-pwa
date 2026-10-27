@@ -1,0 +1,55 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://enclume.local/schemas/contenus/monde/tons.schema.json",
+  "title": "contenus/monde/tons.json — tons de monde",
+  "description": "Champs listés requis ; champs supplémentaires tolérés.",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "entrees"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "$ref": "../../commun.schema.json#/$defs/schema_version"
+    },
+    "entrees": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "nom",
+          "description",
+          "poids"
+        ],
+        "properties": {
+          "id": {
+            "$ref": "../../commun.schema.json#/$defs/slug"
+          },
+          "nom": {
+            "type": "string",
+            "minLength": 1
+          },
+          "description": {
+            "type": "string",
+            "minLength": 1
+          },
+          "mots_cles": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "poids": {
+            "type": "number",
+            "exclusiveMinimum": 0,
+            "description": "Poids du tirage pondéré."
+          }
+        }
+      }
+    }
+  }
+}

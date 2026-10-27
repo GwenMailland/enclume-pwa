@@ -1,0 +1,70 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://enclume.local/schemas/contenus/monde/menaces.schema.json",
+  "title": "contenus/monde/menaces.json — menaces principales",
+  "description": "Champs listés requis ; champs supplémentaires tolérés.",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "entrees"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "$ref": "../../commun.schema.json#/$defs/schema_version"
+    },
+    "entrees": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "nom_gabarit",
+          "antagoniste",
+          "plan",
+          "segments",
+          "poids"
+        ],
+        "properties": {
+          "id": {
+            "$ref": "../../commun.schema.json#/$defs/slug"
+          },
+          "nom_gabarit": {
+            "type": "string",
+            "minLength": 1
+          },
+          "antagoniste": {
+            "type": "string",
+            "minLength": 1
+          },
+          "plan": {
+            "type": "array",
+            "minItems": 3,
+            "items": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "segments": {
+            "type": "integer",
+            "minimum": 4,
+            "maximum": 8
+          },
+          "signes": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "poids": {
+            "type": "number",
+            "exclusiveMinimum": 0,
+            "description": "Poids du tirage pondéré."
+          }
+        }
+      }
+    }
+  }
+}

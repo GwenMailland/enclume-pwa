@@ -1,0 +1,362 @@
+{
+  "schema_version": 1,
+  "or": 214,
+  "objets": [
+    {
+      "id": "obj_cendre_veine_7c21",
+      "nom": "Cendre-Veine",
+      "type": "arme",
+      "sous_type": "épée longue",
+      "qualite": "Unique",
+      "emplacements": [
+        "arme_principale"
+      ],
+      "degats": "2d8+2",
+      "stat_attaque": "FOR",
+      "affixes": [
+        {
+          "id": "afx_braise_vive",
+          "nom": "Braise vive",
+          "effet": "+1d4 dégâts de feu"
+        },
+        {
+          "id": "afx_fil_eternel",
+          "nom": "Fil éternel",
+          "effet": "La durabilité ne baisse que sur un fiasco"
+        },
+        {
+          "id": "afx_chant_lunaire",
+          "nom": "Chant lunaire",
+          "effet": "+2 aux sorts canalisés par la lame",
+          "bonus": {
+            "sorts": 2
+          }
+        },
+        {
+          "id": "afx_resonance",
+          "nom": "Résonance",
+          "effet": "Grandit avec la stat cachée Résonance de son forgeron"
+        }
+      ],
+      "durabilite": {
+        "actuelle": 120,
+        "max": 120
+      },
+      "poids_kg": 1.6,
+      "valeur": 2400,
+      "materiaux": [
+        "mat_acier_noir",
+        "mat_argent_lunaire",
+        "mat_coeur_de_breche"
+      ],
+      "forge_par": "heros",
+      "cree_jour": 39,
+      "lignee": {
+        "xp": 140,
+        "palier": 1,
+        "capacites": [
+          "Éveil I — Souffle de forge : une fois par combat, la lame s'embrase (+1d6 feu)."
+        ]
+      },
+      "histoire": "Forgée à Hautebrande la nuit où le hall fut couvert, avec le cœur arraché au Gardien de vitre. Orvan a tenu la pince ; Aldric a frappé seul. Quand la lame a touché l'eau, la forge entière a chanté."
+    },
+    {
+      "id": "obj_murmure_de_fer_a90e",
+      "nom": "Murmure-de-Fer",
+      "type": "arme",
+      "sous_type": "dague",
+      "qualite": "Unique",
+      "emplacements": [
+        "arme_principale",
+        "arme_secondaire"
+      ],
+      "degats": "1d6+3",
+      "stat_attaque": "AGI",
+      "affixes": [
+        {
+          "id": "afx_silence",
+          "nom": "Silence",
+          "effet": "Les pas du porteur ne font aucun bruit"
+        },
+        {
+          "id": "afx_saignee",
+          "nom": "Saignée",
+          "effet": "Un critique inflige 1d4 dégâts par tour pendant 3 tours"
+        },
+        {
+          "id": "afx_vitre",
+          "nom": "Éclat de vitre",
+          "effet": "+2 contre les créatures de verre",
+          "bonus": {
+            "contre_verre": 2
+          }
+        },
+        {
+          "id": "afx_retour",
+          "nom": "Retour",
+          "effet": "Lancée, elle revient à la main au tour suivant"
+        }
+      ],
+      "durabilite": {
+        "actuelle": 74,
+        "max": 80
+      },
+      "poids_kg": 0.4,
+      "valeur": 1800,
+      "forge_par": null,
+      "cree_jour": 31,
+      "lignee": {
+        "xp": 35,
+        "palier": 0
+      },
+      "histoire": "Trouvée dans la poitrine de verre du Gardien du Gouffre. Personne ne sait qui l'a forgée ; la garde porte une marque effacée en forme de flamme éteinte.",
+      "secret": "Forgée par Hauldren Sans-Flamme il y a trois siècles. La reconnaître fait progresser une condition de classe cachée."
+    },
+    {
+      "id": "obj_lame_chantante_5e3d",
+      "nom": "Lame chantante",
+      "type": "arme",
+      "sous_type": "épée longue",
+      "qualite": "Rare",
+      "emplacements": [
+        "arme_principale"
+      ],
+      "degats": "1d10+1",
+      "stat_attaque": "FOR",
+      "affixes": [
+        {
+          "id": "afx_tranchant",
+          "nom": "Tranchant",
+          "effet": "+1 dégâts",
+          "bonus": {
+            "degats": 1
+          }
+        },
+        {
+          "id": "afx_chant",
+          "nom": "Chant de l'acier",
+          "effet": "Vibre à l'approche d'une brèche"
+        }
+      ],
+      "durabilite": {
+        "actuelle": 41,
+        "max": 60
+      },
+      "poids_kg": 1.5,
+      "valeur": 420,
+      "materiaux": [
+        "mat_acier_noir",
+        "mat_fer_commun"
+      ],
+      "forge_par": "heros",
+      "cree_jour": 25
+    },
+    {
+      "id": "obj_epee_courte_equilibree_c771",
+      "nom": "Épée courte équilibrée",
+      "type": "arme",
+      "sous_type": "épée courte",
+      "qualite": "Fine",
+      "emplacements": [
+        "arme_principale",
+        "arme_secondaire"
+      ],
+      "degats": "1d6+1",
+      "stat_attaque": "AGI",
+      "affixes": [
+        {
+          "id": "afx_equilibre",
+          "nom": "Équilibre",
+          "effet": "+1 à l'initiative",
+          "bonus": {
+            "initiative": 1
+          }
+        }
+      ],
+      "durabilite": {
+        "actuelle": 38,
+        "max": 50
+      },
+      "poids_kg": 1.0,
+      "valeur": 90,
+      "materiaux": [
+        "mat_fer_commun"
+      ],
+      "forge_par": "heros",
+      "cree_jour": 10
+    },
+    {
+      "id": "obj_dague_de_fer_2b10",
+      "nom": "Dague de fer",
+      "type": "arme",
+      "sous_type": "dague",
+      "qualite": "Ordinaire",
+      "emplacements": [
+        "arme_principale",
+        "arme_secondaire"
+      ],
+      "degats": "1d4",
+      "stat_attaque": "AGI",
+      "durabilite": {
+        "actuelle": 22,
+        "max": 30
+      },
+      "poids_kg": 0.5,
+      "valeur": 12,
+      "materiaux": [
+        "mat_fer_commun"
+      ],
+      "forge_par": "heros",
+      "cree_jour": 3,
+      "description": "Ta toute première lame. Le fil est inégal, mais tu ne t'en sépareras pas."
+    },
+    {
+      "id": "obj_brigandine_cloutee_4d52",
+      "nom": "Brigandine cloutée",
+      "type": "armure",
+      "sous_type": "cuir clouté",
+      "qualite": "Fine",
+      "emplacements": [
+        "torse"
+      ],
+      "defense": 3,
+      "affixes": [
+        {
+          "id": "afx_doublure",
+          "nom": "Doublure de laine",
+          "effet": "Résistance au froid"
+        }
+      ],
+      "durabilite": {
+        "actuelle": 45,
+        "max": 55
+      },
+      "poids_kg": 7.0,
+      "valeur": 110,
+      "forge_par": "pnj_orvan_braisier_a1c4"
+    },
+    {
+      "id": "obj_marteau_d_apprenti_0e19",
+      "nom": "Marteau d'apprenti",
+      "type": "outil",
+      "sous_type": "marteau de forge",
+      "qualite": "Ordinaire",
+      "poids_kg": 1.2,
+      "valeur": 8,
+      "forge_par": "pnj_orvan_braisier_a1c4",
+      "description": "Le manche porte les encoches de trois apprentis avant toi."
+    },
+    {
+      "id": "obj_potion_de_soin_91f3",
+      "nom": "Potion de soin",
+      "type": "consommable",
+      "sous_type": "potion",
+      "qualite": "Ordinaire",
+      "quantite": 3,
+      "poids_kg": 0.2,
+      "valeur": 15,
+      "description": "Rend 2d6+2 PV."
+    },
+    {
+      "id": "obj_anneau_de_sel_68ac",
+      "nom": "Anneau de sel",
+      "type": "accessoire",
+      "sous_type": "anneau",
+      "qualite": "Rare",
+      "emplacements": [
+        "anneau_1",
+        "anneau_2"
+      ],
+      "bonus": {
+        "CHA": 1
+      },
+      "affixes": [
+        {
+          "id": "afx_bonne_foi",
+          "nom": "Bonne foi",
+          "effet": "+1 CHA",
+          "bonus": {
+            "CHA": 1
+          }
+        },
+        {
+          "id": "afx_flair",
+          "nom": "Flair marchand",
+          "effet": "Révèle le juste prix d'un objet"
+        }
+      ],
+      "poids_kg": 0.05,
+      "valeur": 300
+    },
+    {
+      "id": "obj_lettre_scellee_d4e0",
+      "nom": "Lettre scellée",
+      "type": "quete",
+      "qualite": "Ordinaire",
+      "description": "Cachet de la Compagnie du Sel, trouvée dans la cargaison de Dorran. Destinataire : « l'acheteur, Port-Sel ».",
+      "secret": "La lettre ordonne d'acheter tout l'argent lunaire de la côte : la Compagnie prépare des armes anti-brèche."
+    }
+  ],
+  "equipement": {
+    "arme_principale": "obj_cendre_veine_7c21",
+    "arme_secondaire": "obj_murmure_de_fer_a90e",
+    "tete": null,
+    "torse": "obj_brigandine_cloutee_4d52",
+    "mains": null,
+    "jambes": null,
+    "pieds": null,
+    "amulette": null,
+    "anneau_1": "obj_anneau_de_sel_68ac",
+    "anneau_2": null
+  },
+  "materiaux": [
+    {
+      "id": "mat_fer_commun",
+      "nom": "Fer commun",
+      "rang": "F",
+      "quantite": 12,
+      "proprietes": [
+        "robuste"
+      ]
+    },
+    {
+      "id": "mat_charbon_de_pin",
+      "nom": "Charbon de pin",
+      "rang": "F",
+      "quantite": 8,
+      "proprietes": [
+        "combustible"
+      ]
+    },
+    {
+      "id": "mat_acier_noir",
+      "nom": "Acier noir",
+      "rang": "E",
+      "quantite": 3,
+      "proprietes": [
+        "tranchant",
+        "lourd"
+      ]
+    },
+    {
+      "id": "mat_ecaille_de_vitre",
+      "nom": "Écaille de vitre",
+      "rang": "E",
+      "quantite": 2,
+      "proprietes": [
+        "reflet",
+        "fragile"
+      ]
+    },
+    {
+      "id": "mat_argent_lunaire",
+      "nom": "Argent lunaire",
+      "rang": "C",
+      "quantite": 1,
+      "proprietes": [
+        "arcane",
+        "conducteur"
+      ]
+    }
+  ]
+}

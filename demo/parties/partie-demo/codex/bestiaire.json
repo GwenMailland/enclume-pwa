@@ -1,0 +1,90 @@
+{
+  "schema_version": 1,
+  "entrees": [
+    {
+      "id": "ene_rat_de_cendre",
+      "nom": "Rat de cendre",
+      "connu": true,
+      "rang": "F",
+      "type": "bete",
+      "description": "Rat gros comme un chien, pelage de suie, attiré par la chaleur des forges.",
+      "pv": 8,
+      "defense": 11,
+      "attaque": 2,
+      "degats": "1d4",
+      "faiblesses": [
+        "eau"
+      ],
+      "rencontres": 3,
+      "vaincus": 5,
+      "premiere_rencontre_jour": 5
+    },
+    {
+      "id": "ene_loup_vitre",
+      "nom": "Loup vitré",
+      "connu": true,
+      "rang": "E",
+      "type": "bete",
+      "description": "Loup dont le dos s'est couvert d'écailles de verre. Morsure venimeuse.",
+      "pv": 18,
+      "defense": 13,
+      "attaque": 3,
+      "degats": "1d6+1",
+      "capacites": [
+        "Morsure venimeuse (END DD 14)"
+      ],
+      "faiblesses": [
+        "contondant"
+      ],
+      "resistances": [
+        "tranchant"
+      ],
+      "rencontres": 2,
+      "vaincus": 4,
+      "premiere_rencontre_jour": 15
+    },
+    {
+      "id": "ene_eclat_errant",
+      "nom": "Éclat errant",
+      "connu": true,
+      "rang": "E",
+      "type": "elementaire",
+      "description": "Fragment de lumière solidifiée qui hante les brèches de verre.",
+      "pv": 14,
+      "defense": 15,
+      "attaque": 4,
+      "degats": "1d8",
+      "resistances": [
+        "feu"
+      ],
+      "rencontres": 1,
+      "vaincus": 6,
+      "premiere_rencontre_jour": 30
+    },
+    {
+      "id": "ene_gardien_de_vitre",
+      "nom": "Gardien de vitre",
+      "connu": true,
+      "rang": "E",
+      "type": "elementaire",
+      "boss": true,
+      "description": "Colosse de verre au cœur incandescent, maître de la brèche du Gouffre.",
+      "pv": 60,
+      "defense": 15,
+      "attaque": 5,
+      "degats": "2d6",
+      "capacites": [
+        "Lumière aveuglante (VOL DD 16)",
+        "Piège de verre"
+      ],
+      "faiblesses": [
+        "contondant",
+        "son"
+      ],
+      "rencontres": 1,
+      "vaincus": 1,
+      "premiere_rencontre_jour": 31,
+      "secret": "Son cœur est un fragment du Roi-sous-Verre."
+    }
+  ]
+}

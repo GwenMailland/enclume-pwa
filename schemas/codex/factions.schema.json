@@ -1,0 +1,45 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://enclume.local/schemas/codex/factions.schema.json",
+  "title": "codex/factions.json — factions",
+  "type": "object",
+  "required": ["schema_version", "entrees"],
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": { "$ref": "../commun.schema.json#/$defs/schema_version" },
+    "entrees": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "nom", "connu", "but", "reputation"],
+        "additionalProperties": false,
+        "properties": {
+          "id": { "$ref": "../commun.schema.json#/$defs/id_fac" },
+          "nom": { "type": "string", "minLength": 1 },
+          "connu": { "type": "boolean" },
+          "description": { "type": "string" },
+          "but": { "type": "string", "description": "But affiché (le vrai but, s'il diffère, va dans `secret`)." },
+          "ressource": { "type": "string" },
+          "methode": { "type": "string" },
+          "siege": { "$ref": "../commun.schema.json#/$defs/id_lieu" },
+          "chef": { "$ref": "../commun.schema.json#/$defs/id_pnj" },
+          "reputation": { "$ref": "../commun.schema.json#/$defs/affinite" },
+          "rang_heros": { "type": ["string", "null"], "description": "Rang du héros dans la faction, null s'il n'en fait pas partie." },
+          "relations": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": ["faction", "valeur"],
+              "additionalProperties": false,
+              "properties": {
+                "faction": { "$ref": "../commun.schema.json#/$defs/id_fac" },
+                "valeur": { "$ref": "../commun.schema.json#/$defs/affinite" }
+              }
+            }
+          },
+          "secret": { "$ref": "../commun.schema.json#/$defs/secret" }
+        }
+      }
+    }
+  }
+}

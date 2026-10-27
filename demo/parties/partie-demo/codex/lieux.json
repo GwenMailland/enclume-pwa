@@ -1,0 +1,75 @@
+{
+  "schema_version": 1,
+  "entrees": [
+    {
+      "id": "lieu_vel_ardhan_08aa",
+      "nom": "Vel-Ardhan",
+      "connu": true,
+      "type": "cite",
+      "region": "reg_marche_de_braise",
+      "description": "Cité-forge aux cheminées innombrables, siège du Cercle des Cendres. Le ciel y est toujours roux.",
+      "etat": "intact",
+      "rang_danger": "F",
+      "decouvertes": [
+        "La forge d'Orvan, rue des Soufflets",
+        "L'Académie du Verre et sa bibliothèque"
+      ],
+      "visite_jour": 1
+    },
+    {
+      "id": "lieu_port_sel_51ac",
+      "nom": "Port-Sel",
+      "connu": true,
+      "type": "port",
+      "region": "reg_cotes_de_sel",
+      "description": "Port de pêche et de contrebande, entrepôts blancs de la Compagnie du Sel.",
+      "etat": "controle",
+      "controle_par": "fac_compagnie_du_sel_8d3e",
+      "rang_danger": "E",
+      "decouvertes": [
+        "La taverne du Héron Gris"
+      ],
+      "visite_jour": 12,
+      "secret": "Sous l'entrepôt n°4, un atelier clandestin teste des lames d'argent lunaire."
+    },
+    {
+      "id": "lieu_hautebrande_6d02",
+      "nom": "Hautebrande",
+      "connu": true,
+      "type": "hameau",
+      "region": "reg_marche_de_braise",
+      "description": "Fort en ruine sur un éperon, relevé par Aldric. Un hall, une forge, une scierie, et une palissade en chantier.",
+      "etat": "intact",
+      "rang_danger": "E",
+      "decouvertes": [
+        "Une enclume ancienne sous les gravats du donjon"
+      ],
+      "visite_jour": 34
+    },
+    {
+      "id": "lieu_gouffre_de_vitre_e7a9",
+      "nom": "Gouffre de Vitre",
+      "connu": true,
+      "type": "site_breche",
+      "region": "reg_landes_vitrees",
+      "description": "Crevasse aux parois vitrifiées, ancien site d'une brèche de rang E désormais fermée.",
+      "etat": "endommage",
+      "rang_danger": "E",
+      "decouvertes": [
+        "La tombe de Tessa, au bord du Gouffre"
+      ],
+      "visite_jour": 19
+    },
+    {
+      "id": "lieu_forge_sans_flamme_f001",
+      "nom": "Forge-sans-Flamme",
+      "connu": false,
+      "type": "forge",
+      "region": "reg_crocs_d_hiver",
+      "description": "Une forge dont le foyer n'a jamais été allumé et qui pourtant rougeoie.",
+      "etat": "intact",
+      "rang_danger": "C",
+      "secret": "Demeure de Hauldren. On ne la trouve qu'en portant une arme forgée de sa main."
+    }
+  ]
+}

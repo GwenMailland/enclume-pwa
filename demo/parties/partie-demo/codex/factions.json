@@ -1,0 +1,71 @@
+{
+  "schema_version": 1,
+  "entrees": [
+    {
+      "id": "fac_cercle_des_cendres_2a71",
+      "nom": "Cercle des Cendres",
+      "connu": true,
+      "description": "Guilde des forgerons de Vel-Ardhan, gardienne des recettes anciennes.",
+      "but": "Préserver le savoir des forges et leur indépendance",
+      "ressource": "recettes et maîtres",
+      "methode": "serments et apprentissage",
+      "siege": "lieu_vel_ardhan_08aa",
+      "reputation": 35,
+      "rang_heros": "Juré",
+      "relations": [
+        {
+          "faction": "fac_compagnie_du_sel_8d3e",
+          "valeur": -40
+        },
+        {
+          "faction": "fac_marees_noires_77b0",
+          "valeur": 0
+        }
+      ]
+    },
+    {
+      "id": "fac_marees_noires_77b0",
+      "nom": "Marées Noires",
+      "connu": true,
+      "description": "Réseau de contrebandiers des côtes de sel.",
+      "but": "Faire passer ce que la Compagnie taxe",
+      "ressource": "bateaux et silence",
+      "methode": "dettes et intimidation",
+      "siege": "lieu_port_sel_51ac",
+      "reputation": 5,
+      "rang_heros": null,
+      "relations": [
+        {
+          "faction": "fac_compagnie_du_sel_8d3e",
+          "valeur": -60
+        }
+      ]
+    },
+    {
+      "id": "fac_compagnie_du_sel_8d3e",
+      "nom": "Compagnie du Sel",
+      "connu": true,
+      "description": "Compagnie marchande qui détient les licences d'exploitation des brèches de la côte.",
+      "but": "Sécuriser les brèches pour le bien de tous",
+      "ressource": "or et licences",
+      "methode": "monopoles et mercenaires",
+      "siege": "lieu_port_sel_51ac",
+      "reputation": -15,
+      "rang_heros": null,
+      "relations": [
+        {
+          "faction": "fac_cercle_des_cendres_2a71",
+          "valeur": -40
+        },
+        {
+          "faction": "fac_marees_noires_77b0",
+          "valeur": -60
+        }
+      ],
+      "secret": {
+        "vrai_but": "Provoquer des débordements pour justifier un monopole militaire",
+        "lien_menace": "Finance sans le savoir les fidèles du Roi-sous-Verre"
+      }
+    }
+  ]
+}

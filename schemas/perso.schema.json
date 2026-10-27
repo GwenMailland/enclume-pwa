@@ -1,0 +1,157 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://enclume.local/schemas/perso.schema.json",
+  "title": "perso.json — le héros",
+  "description": "Les dérivées (PV max, PM max, Défense…) ne sont pas stockées : GDD §3.2. `xp` = XP accumulée dans le niveau courant.",
+  "type": "object",
+  "required": ["schema_version", "nom", "origine", "niveau", "xp", "points_stat", "points_competence", "stats", "usage", "stats_cachees", "ressources", "classe", "metiers", "competences", "titres", "malus"],
+  "additionalProperties": false,
+  "$defs": {
+    "sept_stats": {
+      "type": "object",
+      "required": ["FOR", "AGI", "END", "INT", "DEX", "VOL", "CHA"],
+      "additionalProperties": false,
+      "properties": {
+        "FOR": { "type": "integer", "minimum": 0 },
+        "AGI": { "type": "integer", "minimum": 0 },
+        "END": { "type": "integer", "minimum": 0 },
+        "INT": { "type": "integer", "minimum": 0 },
+        "DEX": { "type": "integer", "minimum": 0 },
+        "VOL": { "type": "integer", "minimum": 0 },
+        "CHA": { "type": "integer", "minimum": 0 }
+      }
+    }
+  },
+  "properties": {
+    "schema_version": { "$ref": "commun.schema.json#/$defs/schema_version" },
+    "nom": { "type": "string", "minLength": 1 },
+    "origine": { "enum": ["apprenti_forgeron", "mercenaire", "novice_arcanique", "chasseur", "batisseur", "orphelin_des_rues"] },
+    "niveau": { "type": "integer", "minimum": 1 },
+    "xp": { "type": "integer", "minimum": 0 },
+    "points_stat": { "type": "integer", "minimum": 0 },
+    "points_competence": { "type": "integer", "minimum": 0 },
+    "stats": { "$ref": "#/$defs/sept_stats" },
+    "usage": { "description": "Compteurs d'usage (GDD §3.5). +1 quand le compteur atteint 10 + valeur.", "$ref": "#/$defs/sept_stats" },
+    "stats_cachees": {
+      "description": "Clé = identifiant ASCII (ex. Resonance). Invisibles tant que `debloquee` est false (GDD §3.3).",
+      "type": "object",
+      "additionalProperties": {
+        "type": "object",
+        "required": ["valeur", "debloquee"],
+        "additionalProperties": false,
+        "properties": {
+          "nom": { "type": "string", "description": "Nom affichable." },
+          "valeur": { "type": "integer", "minimum": 0 },
+          "debloquee": { "type": "boolean" },
+          "description": { "type": "string" }
+        }
+      }
+    },
+    "ressources": {
+      "description": "Valeurs courantes. Les maximums sont dérivés.",
+      "type": "object",
+      "required": ["pv", "pm", "end"],
+      "additionalProperties": false,
+      "properties": {
+        "pv": { "type": "integer", "minimum": 0 },
+        "pm": { "type": "integer", "minimum": 0 },
+        "end": { "type": "integer", "minimum": 0 }
+      }
+    },
+    "classe": {
+      "description": "null tant que le héros n'a pas de classe (GDD §6.1).",
+      "oneOf": [
+        { "type": "null" },
+        {
+          "type": "object",
+          "required": ["id", "nom", "rang", "eveil"],
+          "additionalProperties": false,
+          "properties": {
+            "id": { "$ref": "commun.schema.json#/$defs/id_cls" },
+            "nom": { "type": "string" },
+            "rang": { "$ref": "commun.schema.json#/$defs/rang_classe" },
+            "eveil": { "type": "integer", "minimum": 0, "maximum": 4 },
+            "bonus": { "$ref": "commun.schema.json#/$defs/bonus" }
+          }
+        }
+      ]
+    },
+    "metiers": {
+      "description": "Niveau de chaque métier. `forge` = Maîtrise de forge (GDD §9.2).",
+      "type": "object",
+      "required": ["forge", "enchantement", "batisseur"],
+      "additionalProperties": false,
+      "properties": {
+        "forge": { "type": "integer", "minimum": 0 },
+        "enchantement": { "type": "integer", "minimum": 0 },
+        "batisseur": { "type": "integer", "minimum": 0 },
+        "alchimie": { "type": "integer", "minimum": 0 },
+        "negoce": { "type": "integer", "minimum": 0 },
+        "commandement": { "type": "integer", "minimum": 0 }
+      }
+    },
+    "competences": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "nom", "type", "niveau", "xp"],
+        "additionalProperties": false,
+        "properties": {
+          "id": { "$ref": "commun.schema.json#/$defs/id_cmp" },
+          "nom": { "type": "string" },
+          "type": { "enum": ["active", "passive", "metier"] },
+          "niveau": { "type": "integer", "minimum": 1, "maximum": 10 },
+          "xp": { "type": "integer", "minimum": 0 },
+          "stat": { "$ref": "commun.schema.json#/$defs/stat" },
+          "cout": { "$ref": "commun.schema.json#/$defs/cout" },
+          "recharge": { "type": "integer", "minimum": 0, "description": "En tours." },
+          "description": { "type": "string" },
+          "source": { "type": "string" }
+        }
+      }
+    },
+    "titres": {
+      "type": "object",
+      "required": ["actifs", "obtenus"],
+      "additionalProperties": false,
+      "properties": {
+        "actifs": {
+          "description": "3 emplacements actifs au plus (GDD §8). IDs présents dans `obtenus`.",
+          "type": "array",
+          "maxItems": 3,
+          "uniqueItems": true,
+          "items": { "$ref": "commun.schema.json#/$defs/id_tit" }
+        },
+        "obtenus": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["id", "nom", "jour"],
+            "additionalProperties": false,
+            "properties": {
+              "id": { "$ref": "commun.schema.json#/$defs/id_tit" },
+              "nom": { "type": "string" },
+              "description": { "type": "string" },
+              "bonus": { "$ref": "commun.schema.json#/$defs/bonus" },
+              "jour": { "$ref": "commun.schema.json#/$defs/jour" }
+            }
+          }
+        }
+      }
+    },
+    "malus": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "nom", "jets", "jusqua_jour"],
+        "additionalProperties": false,
+        "properties": {
+          "id": { "$ref": "commun.schema.json#/$defs/slug" },
+          "nom": { "type": "string" },
+          "jets": { "type": "integer", "maximum": 0, "description": "Modificateur appliqué à tous les jets." },
+          "jusqua_jour": { "$ref": "commun.schema.json#/$defs/jour" }
+        }
+      }
+    }
+  }
+}

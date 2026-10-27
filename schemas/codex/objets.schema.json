@@ -1,0 +1,34 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://enclume.local/schemas/codex/objets.schema.json",
+  "title": "codex/objets.json — objets notables",
+  "description": "Objets Unique/Légendaire, artefacts du monde, objets de quête. Si le héros possède l'objet, l'entrée a le même id que l'instance d'inventaire (qui porte la mécanique).",
+  "type": "object",
+  "required": ["schema_version", "entrees"],
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": { "$ref": "../commun.schema.json#/$defs/schema_version" },
+    "entrees": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "nom", "connu", "type", "qualite"],
+        "additionalProperties": false,
+        "properties": {
+          "id": { "$ref": "../commun.schema.json#/$defs/id_obj" },
+          "nom": { "type": "string", "minLength": 1 },
+          "connu": { "type": "boolean" },
+          "type": { "$ref": "../commun.schema.json#/$defs/type_objet" },
+          "qualite": { "$ref": "../commun.schema.json#/$defs/qualite" },
+          "description": { "type": "string" },
+          "histoire": { "type": "string" },
+          "porteur": { "type": ["string", "null"], "description": "\"heros\", un id pnj_ ou null." },
+          "lieu": { "$ref": "../commun.schema.json#/$defs/id_lieu" },
+          "createur": { "type": ["string", "null"], "description": "\"heros\", un id pnj_ ou null (inconnu)." },
+          "decouvert_jour": { "$ref": "../commun.schema.json#/$defs/jour" },
+          "secret": { "$ref": "../commun.schema.json#/$defs/secret" }
+        }
+      }
+    }
+  }
+}

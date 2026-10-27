@@ -1,0 +1,68 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://enclume.local/schemas/contenus/competences.schema.json",
+  "title": "contenus/competences.json",
+  "description": "Champs listés requis ; champs supplémentaires tolérés.",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "entrees"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "$ref": "../commun.schema.json#/$defs/schema_version"
+    },
+    "entrees": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "nom",
+          "type",
+          "description"
+        ],
+        "properties": {
+          "id": {
+            "$ref": "../commun.schema.json#/$defs/id_cmp"
+          },
+          "nom": {
+            "type": "string",
+            "minLength": 1
+          },
+          "type": {
+            "enum": [
+              "active",
+              "passive",
+              "metier"
+            ]
+          },
+          "stat": {
+            "$ref": "../commun.schema.json#/$defs/stat"
+          },
+          "cout": {
+            "$ref": "../commun.schema.json#/$defs/cout"
+          },
+          "recharge": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "description": {
+            "type": "string",
+            "minLength": 1
+          },
+          "par_niveau": {
+            "type": "string",
+            "minLength": 1
+          },
+          "source": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      }
+    }
+  }
+}

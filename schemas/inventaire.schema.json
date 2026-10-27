@@ -1,0 +1,235 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://enclume.local/schemas/inventaire.schema.json",
+  "title": "inventaire.json — objets, équipement, or, matériaux",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "or",
+    "objets",
+    "equipement",
+    "materiaux"
+  ],
+  "additionalProperties": false,
+  "$defs": {
+    "objet_brut": {
+      "description": "Objet sans contrainte d'id (utilisé par le delta objet_ajout : le moteur attribue l'id).",
+      "type": "object",
+      "required": [
+        "nom",
+        "type",
+        "qualite"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "$ref": "commun.schema.json#/$defs/id_obj"
+        },
+        "nom": {
+          "type": "string",
+          "minLength": 1
+        },
+        "type": {
+          "$ref": "commun.schema.json#/$defs/type_objet"
+        },
+        "sous_type": {
+          "type": "string",
+          "description": "épée longue, dague, cuir clouté, potion…"
+        },
+        "qualite": {
+          "$ref": "commun.schema.json#/$defs/qualite"
+        },
+        "emplacements": {
+          "description": "Emplacements où l'objet peut être équipé.",
+          "type": "array",
+          "items": {
+            "$ref": "commun.schema.json#/$defs/emplacement"
+          }
+        },
+        "degats": {
+          "$ref": "commun.schema.json#/$defs/des_degats"
+        },
+        "stat_attaque": {
+          "enum": [
+            "FOR",
+            "AGI",
+            "INT"
+          ]
+        },
+        "defense": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "bonus": {
+          "$ref": "commun.schema.json#/$defs/bonus"
+        },
+        "affixes": {
+          "type": "array",
+          "items": {
+            "$ref": "commun.schema.json#/$defs/affixe"
+          }
+        },
+        "durabilite": {
+          "type": "object",
+          "required": [
+            "actuelle",
+            "max"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "actuelle": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "max": {
+              "type": "integer",
+              "minimum": 1
+            }
+          }
+        },
+        "quantite": {
+          "type": "integer",
+          "minimum": 1,
+          "default": 1
+        },
+        "poids_kg": {
+          "type": "number",
+          "minimum": 0
+        },
+        "valeur": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "En pièces d'or."
+        },
+        "materiaux": {
+          "type": "array",
+          "items": {
+            "$ref": "commun.schema.json#/$defs/id_mat"
+          }
+        },
+        "forge_par": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "\"heros\", un id pnj_ ou null (trouvé)."
+        },
+        "cree_jour": {
+          "$ref": "commun.schema.json#/$defs/jour"
+        },
+        "lignee": {
+          "description": "GDD §9.3 : XP d'usage et paliers d'éveil (I, II, III).",
+          "type": "object",
+          "required": [
+            "xp",
+            "palier"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "xp": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "palier": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 3
+            },
+            "capacites": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "histoire": {
+          "type": "string",
+          "description": "2-3 phrases (Unique et Légendaire)."
+        },
+        "maudit": {
+          "type": "boolean"
+        },
+        "description": {
+          "type": "string"
+        },
+        "secret": {
+          "$ref": "commun.schema.json#/$defs/secret"
+        }
+      }
+    },
+    "objet": {
+      "description": "Instance d'objet possédée. Un objet Unique/Légendaire a aussi une entrée de codex (codex/objets.json) avec le même id.",
+      "$ref": "#/$defs/objet_brut",
+      "required": [
+        "id"
+      ]
+    }
+  },
+  "properties": {
+    "schema_version": {
+      "$ref": "commun.schema.json#/$defs/schema_version"
+    },
+    "or": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "objets": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/objet"
+      }
+    },
+    "equipement": {
+      "description": "Emplacement → id d'un objet de `objets`, ou null.",
+      "type": "object",
+      "propertyNames": {
+        "$ref": "commun.schema.json#/$defs/emplacement"
+      },
+      "additionalProperties": {
+        "oneOf": [
+          {
+            "type": "null"
+          },
+          {
+            "$ref": "commun.schema.json#/$defs/id_obj"
+          }
+        ]
+      }
+    },
+    "materiaux": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "nom",
+          "rang",
+          "quantite"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "$ref": "commun.schema.json#/$defs/id_mat"
+          },
+          "nom": {
+            "type": "string"
+          },
+          "rang": {
+            "$ref": "commun.schema.json#/$defs/rang"
+          },
+          "quantite": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "proprietes": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    }
+  }
+}

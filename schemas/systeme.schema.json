@@ -1,0 +1,109 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://enclume.local/schemas/systeme.schema.json",
+  "title": "systeme.json — le Système (GDD §11)",
+  "type": "object",
+  "required": ["schema_version", "rang", "quotidiennes", "bilan_quotidiennes", "quetes", "breches", "penalites"],
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": { "$ref": "commun.schema.json#/$defs/schema_version" },
+    "rang": { "$ref": "commun.schema.json#/$defs/rang" },
+    "quotidiennes": {
+      "description": "Quêtes quotidiennes du jour courant, null avant l'apparition du Système.",
+      "oneOf": [
+        { "type": "null" },
+        {
+          "type": "object",
+          "required": ["jour", "taches", "recompense", "statut"],
+          "additionalProperties": false,
+          "properties": {
+            "jour": { "$ref": "commun.schema.json#/$defs/jour" },
+            "taches": {
+              "type": "array",
+              "minItems": 1,
+              "items": {
+                "type": "object",
+                "required": ["id", "texte", "objectif", "progression"],
+                "additionalProperties": false,
+                "properties": {
+                  "id": { "$ref": "commun.schema.json#/$defs/id_quo" },
+                  "texte": { "type": "string" },
+                  "objectif": { "type": "integer", "minimum": 1 },
+                  "progression": { "type": "integer", "minimum": 0 },
+                  "unite": { "type": "string" }
+                }
+              }
+            },
+            "recompense": { "type": "string" },
+            "penalite": { "type": "string" },
+            "statut": { "enum": ["en_cours", "accomplie", "echouee"] }
+          }
+        }
+      ]
+    },
+    "bilan_quotidiennes": {
+      "type": "object",
+      "required": ["accomplies", "echouees", "serie"],
+      "additionalProperties": false,
+      "properties": {
+        "accomplies": { "type": "integer", "minimum": 0 },
+        "echouees": { "type": "integer", "minimum": 0 },
+        "serie": { "type": "integer", "minimum": 0, "description": "Jours consécutifs accomplis." }
+      }
+    },
+    "quetes": {
+      "description": "Quêtes du Système (urgentes ou cachées, avec compte à rebours).",
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "titre", "type", "statut"],
+        "additionalProperties": false,
+        "properties": {
+          "id": { "$ref": "commun.schema.json#/$defs/id_qst" },
+          "titre": { "type": "string" },
+          "description": { "type": "string" },
+          "type": { "enum": ["urgente", "cachee", "arc"] },
+          "statut": { "enum": ["active", "terminee", "echouee"] },
+          "echeance_jour": { "$ref": "commun.schema.json#/$defs/jour" },
+          "recompense": { "type": "string" },
+          "echec": { "type": "string" }
+        }
+      }
+    },
+    "breches": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "nom", "rang", "region", "etat", "apparue_jour"],
+        "additionalProperties": false,
+        "properties": {
+          "id": { "$ref": "commun.schema.json#/$defs/id_brc" },
+          "nom": { "type": "string" },
+          "rang": { "$ref": "commun.schema.json#/$defs/rang" },
+          "region": { "$ref": "commun.schema.json#/$defs/id_reg" },
+          "lieu": { "$ref": "commun.schema.json#/$defs/id_lieu" },
+          "etat": { "enum": ["ouverte", "en_cours", "fermee", "debordee"] },
+          "apparue_jour": { "$ref": "commun.schema.json#/$defs/jour" },
+          "debordement_jour": { "$ref": "commun.schema.json#/$defs/jour", "description": "Jour où elle déborde si elle n'est pas fermée." },
+          "fermee_jour": { "$ref": "commun.schema.json#/$defs/jour" },
+          "etages": { "type": "integer", "minimum": 1 },
+          "etage_atteint": { "type": "integer", "minimum": 0 }
+        }
+      }
+    },
+    "penalites": {
+      "description": "Épreuves de pénalité (quotidienne ignorée).",
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["jour", "raison", "statut"],
+        "additionalProperties": false,
+        "properties": {
+          "jour": { "$ref": "commun.schema.json#/$defs/jour" },
+          "raison": { "type": "string" },
+          "statut": { "enum": ["a_venir", "subie", "survecue"] }
+        }
+      }
+    }
+  }
+}

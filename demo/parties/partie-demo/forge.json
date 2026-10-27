@@ -1,0 +1,222 @@
+{
+  "schema_version": 1,
+  "maitrise_xp": 260,
+  "enclume": {
+    "nom": "Enclume de Hautebrande",
+    "bonus": 1
+  },
+  "recettes": [
+    {
+      "id": "rec_dague_simple",
+      "nom": "Dague simple",
+      "type": "arme",
+      "materiaux": [
+        {
+          "id": "mat_fer_commun",
+          "nom": "Fer commun",
+          "quantite": 2
+        }
+      ],
+      "heures": 2,
+      "source": "origine",
+      "jour": 1
+    },
+    {
+      "id": "rec_epee_courte",
+      "nom": "Épée courte",
+      "type": "arme",
+      "materiaux": [
+        {
+          "id": "mat_fer_commun",
+          "nom": "Fer commun",
+          "quantite": 3
+        }
+      ],
+      "heures": 4,
+      "source": "apprise",
+      "jour": 8
+    },
+    {
+      "id": "rec_epee_longue",
+      "nom": "Épée longue",
+      "type": "arme",
+      "materiaux": [
+        {
+          "id": "mat_acier_noir",
+          "nom": "Acier noir",
+          "quantite": 2
+        },
+        {
+          "id": "mat_fer_commun",
+          "nom": "Fer commun",
+          "quantite": 2
+        }
+      ],
+      "heures": 6,
+      "source": "apprise",
+      "jour": 22
+    },
+    {
+      "id": "rec_brigandine",
+      "nom": "Brigandine",
+      "type": "armure",
+      "materiaux": [
+        {
+          "id": "mat_fer_commun",
+          "nom": "Fer commun",
+          "quantite": 4
+        },
+        {
+          "id": "mat_cuir_tanne",
+          "nom": "Cuir tanné",
+          "quantite": 3
+        }
+      ],
+      "heures": 8,
+      "source": "apprise",
+      "jour": 22
+    },
+    {
+      "id": "rec_pointe_de_vitre",
+      "nom": "Pointe de vitre",
+      "type": "arme",
+      "materiaux": [
+        {
+          "id": "mat_ecaille_de_vitre",
+          "nom": "Écaille de vitre",
+          "quantite": 3
+        },
+        {
+          "id": "mat_argent_lunaire",
+          "nom": "Argent lunaire",
+          "quantite": 1
+        }
+      ],
+      "heures": 5,
+      "source": "decouverte",
+      "jour": 32
+    }
+  ],
+  "historique": [
+    {
+      "jour": 3,
+      "session": 1,
+      "recette": "rec_dague_simple",
+      "experimental": false,
+      "materiaux": [
+        {
+          "id": "mat_fer_commun",
+          "nom": "Fer commun",
+          "quantite": 2
+        }
+      ],
+      "d20": 11,
+      "total": 15,
+      "qualite": "Ordinaire",
+      "objet": "obj_dague_de_fer_2b10",
+      "xp_maitrise": 10,
+      "nom": "Dague de fer"
+    },
+    {
+      "jour": 10,
+      "session": 3,
+      "recette": "rec_epee_courte",
+      "experimental": false,
+      "materiaux": [
+        {
+          "id": "mat_fer_commun",
+          "nom": "Fer commun",
+          "quantite": 3
+        }
+      ],
+      "d20": 14,
+      "total": 19,
+      "qualite": "Fine",
+      "objet": "obj_epee_courte_equilibree_c771",
+      "xp_maitrise": 25,
+      "nom": "Épée courte équilibrée"
+    },
+    {
+      "jour": 17,
+      "session": 4,
+      "recette": null,
+      "experimental": true,
+      "materiaux": [
+        {
+          "id": "mat_fer_commun",
+          "nom": "Fer commun",
+          "quantite": 2
+        },
+        {
+          "id": "mat_ecaille_de_vitre",
+          "nom": "Écaille de vitre",
+          "quantite": 2
+        }
+      ],
+      "d20": 3,
+      "total": 4,
+      "qualite": "Ratee",
+      "objet": null,
+      "xp_maitrise": 5
+    },
+    {
+      "jour": 25,
+      "session": 6,
+      "recette": "rec_epee_longue",
+      "experimental": false,
+      "materiaux": [
+        {
+          "id": "mat_acier_noir",
+          "nom": "Acier noir",
+          "quantite": 2
+        },
+        {
+          "id": "mat_fer_commun",
+          "nom": "Fer commun",
+          "quantite": 2
+        }
+      ],
+      "d20": 18,
+      "total": 25,
+      "qualite": "Rare",
+      "objet": "obj_lame_chantante_5e3d",
+      "xp_maitrise": 60,
+      "nom": "Lame chantante"
+    },
+    {
+      "jour": 39,
+      "session": 9,
+      "recette": "rec_epee_longue",
+      "experimental": false,
+      "materiaux": [
+        {
+          "id": "mat_acier_noir",
+          "nom": "Acier noir",
+          "quantite": 2
+        },
+        {
+          "id": "mat_argent_lunaire",
+          "nom": "Argent lunaire",
+          "quantite": 1
+        },
+        {
+          "id": "mat_coeur_de_breche",
+          "nom": "Cœur de brèche",
+          "quantite": 1
+        }
+      ],
+      "d20": 20,
+      "total": 36,
+      "qualite": "Unique",
+      "objet": "obj_cendre_veine_7c21",
+      "xp_maitrise": 160,
+      "nom": "Cendre-Veine"
+    }
+  ],
+  "premieres_qualites": [
+    "Ordinaire",
+    "Fine",
+    "Rare",
+    "Unique"
+  ]
+}

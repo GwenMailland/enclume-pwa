@@ -1,0 +1,267 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://enclume.local/schemas/delta.schema.json",
+  "title": "Delta — modification d'état écrite par le MJ (ARCHITECTURE §5)",
+  "description": "Validé par ce schéma AVANT application ; les garde-fous métier (plafond d'XP, références, verrous…) sont vérifiés ensuite par moteur/delta.py ; les fichiers résultants sont revalidés contre leurs schémas. Ajouter une opération = demande à l'architecte (docs/DEMANDES.md).",
+  "type": "object",
+  "required": ["session", "operations"],
+  "additionalProperties": false,
+  "properties": {
+    "session": { "type": "integer", "minimum": 1 },
+    "commentaire": { "type": "string" },
+    "operations": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/operation" } }
+  },
+  "$defs": {
+    "operation": {
+      "type": "object",
+      "required": ["op"],
+      "properties": {
+        "op": {
+          "enum": [
+            "xp", "ressource", "or",
+            "objet_ajout", "objet_retrait", "objet_maj", "equiper", "desequiper", "materiau",
+            "codex_upsert", "affinite", "souvenir", "reputation",
+            "quete", "lieu", "evenement",
+            "titre", "classe", "stat_cachee", "malus",
+            "destinee", "jalon", "ville", "statut"
+          ]
+        }
+      },
+      "allOf": [
+        { "if": { "properties": { "op": { "const": "xp" } } }, "then": { "$ref": "#/$defs/op_xp" } },
+        { "if": { "properties": { "op": { "const": "ressource" } } }, "then": { "$ref": "#/$defs/op_ressource" } },
+        { "if": { "properties": { "op": { "const": "or" } } }, "then": { "$ref": "#/$defs/op_or" } },
+        { "if": { "properties": { "op": { "const": "objet_ajout" } } }, "then": { "$ref": "#/$defs/op_objet_ajout" } },
+        { "if": { "properties": { "op": { "const": "objet_retrait" } } }, "then": { "$ref": "#/$defs/op_objet_retrait" } },
+        { "if": { "properties": { "op": { "const": "objet_maj" } } }, "then": { "$ref": "#/$defs/op_objet_maj" } },
+        { "if": { "properties": { "op": { "const": "equiper" } } }, "then": { "$ref": "#/$defs/op_equiper" } },
+        { "if": { "properties": { "op": { "const": "desequiper" } } }, "then": { "$ref": "#/$defs/op_desequiper" } },
+        { "if": { "properties": { "op": { "const": "materiau" } } }, "then": { "$ref": "#/$defs/op_materiau" } },
+        { "if": { "properties": { "op": { "const": "codex_upsert" } } }, "then": { "$ref": "#/$defs/op_codex_upsert" } },
+        { "if": { "properties": { "op": { "const": "affinite" } } }, "then": { "$ref": "#/$defs/op_affinite" } },
+        { "if": { "properties": { "op": { "const": "souvenir" } } }, "then": { "$ref": "#/$defs/op_souvenir" } },
+        { "if": { "properties": { "op": { "const": "reputation" } } }, "then": { "$ref": "#/$defs/op_reputation" } },
+        { "if": { "properties": { "op": { "const": "quete" } } }, "then": { "$ref": "#/$defs/op_quete" } },
+        { "if": { "properties": { "op": { "const": "lieu" } } }, "then": { "$ref": "#/$defs/op_lieu" } },
+        { "if": { "properties": { "op": { "const": "evenement" } } }, "then": { "$ref": "#/$defs/op_evenement" } },
+        { "if": { "properties": { "op": { "const": "titre" } } }, "then": { "$ref": "#/$defs/op_titre" } },
+        { "if": { "properties": { "op": { "const": "classe" } } }, "then": { "$ref": "#/$defs/op_classe" } },
+        { "if": { "properties": { "op": { "const": "stat_cachee" } } }, "then": { "$ref": "#/$defs/op_stat_cachee" } },
+        { "if": { "properties": { "op": { "const": "malus" } } }, "then": { "$ref": "#/$defs/op_malus" } },
+        { "if": { "properties": { "op": { "const": "destinee" } } }, "then": { "$ref": "#/$defs/op_destinee" } },
+        { "if": { "properties": { "op": { "const": "jalon" } } }, "then": { "$ref": "#/$defs/op_jalon" } },
+        { "if": { "properties": { "op": { "const": "ville" } } }, "then": { "$ref": "#/$defs/op_ville" } },
+        { "if": { "properties": { "op": { "const": "statut" } } }, "then": { "$ref": "#/$defs/op_statut" } }
+      ]
+    },
+
+    "op_xp": {
+      "description": "XP gagnée. Plafonnée par opération selon le niveau (XP_PLAFOND).",
+      "type": "object", "required": ["op", "valeur", "raison"], "additionalProperties": false,
+      "properties": { "op": true, "valeur": { "type": "integer", "minimum": 1 }, "raison": { "type": "string", "minLength": 1 } }
+    },
+    "op_ressource": {
+      "description": "Variation de PV/PM/⚡ courants (bornée par 0 et le maximum dérivé).",
+      "type": "object", "required": ["op", "cible", "valeur"], "additionalProperties": false,
+      "properties": { "op": true, "cible": { "enum": ["pv", "pm", "end"] }, "valeur": { "type": "integer" }, "raison": { "type": "string" } }
+    },
+    "op_or": {
+      "description": "Variation d'or. L'or ne descend pas sous 0.",
+      "type": "object", "required": ["op", "valeur"], "additionalProperties": false,
+      "properties": { "op": true, "valeur": { "type": "integer" }, "raison": { "type": "string" } }
+    },
+    "op_objet_ajout": {
+      "type": "object", "required": ["op", "objet"], "additionalProperties": false,
+      "properties": { "op": true, "objet": { "$ref": "inventaire.schema.json#/$defs/objet_brut" } }
+    },
+    "op_objet_retrait": {
+      "description": "On ne retire pas un objet absent.",
+      "type": "object", "required": ["op", "id"], "additionalProperties": false,
+      "properties": { "op": true, "id": { "$ref": "commun.schema.json#/$defs/id_obj" }, "quantite": { "type": "integer", "minimum": 1 }, "raison": { "type": "string" } }
+    },
+    "op_objet_maj": {
+      "description": "Met à jour des champs d'un objet possédé (durabilité, lignée, affixes, nom, histoire).",
+      "type": "object", "required": ["op", "id", "champs"], "additionalProperties": false,
+      "properties": {
+        "op": true,
+        "id": { "$ref": "commun.schema.json#/$defs/id_obj" },
+        "champs": {
+          "type": "object", "minProperties": 1, "additionalProperties": false,
+          "properties": {
+            "nom": { "type": "string" },
+            "histoire": { "type": "string" },
+            "durabilite": true,
+            "lignee": true,
+            "affixes": true,
+            "maudit": { "type": "boolean" }
+          }
+        }
+      }
+    },
+    "op_equiper": {
+      "type": "object", "required": ["op", "id", "emplacement"], "additionalProperties": false,
+      "properties": { "op": true, "id": { "$ref": "commun.schema.json#/$defs/id_obj" }, "emplacement": { "$ref": "commun.schema.json#/$defs/emplacement" } }
+    },
+    "op_desequiper": {
+      "type": "object", "required": ["op", "emplacement"], "additionalProperties": false,
+      "properties": { "op": true, "emplacement": { "$ref": "commun.schema.json#/$defs/emplacement" } }
+    },
+    "op_materiau": {
+      "description": "Quantité positive = gain, négative = perte. `nom` et `rang` requis pour un matériau absent de l'inventaire.",
+      "type": "object", "required": ["op", "id", "quantite"], "additionalProperties": false,
+      "properties": {
+        "op": true,
+        "id": { "$ref": "commun.schema.json#/$defs/id_mat" },
+        "quantite": { "type": "integer", "not": { "const": 0 } },
+        "nom": { "type": "string" },
+        "rang": { "$ref": "commun.schema.json#/$defs/rang" }
+      }
+    },
+    "op_codex_upsert": {
+      "description": "Crée ou fusionne une entrée de codex. L'entrée fusionnée est validée contre le schéma du fichier de codex correspondant.",
+      "type": "object", "required": ["op", "type", "entree"], "additionalProperties": false,
+      "properties": {
+        "op": true,
+        "type": { "enum": ["pnj", "lieu", "faction", "bestiaire", "objet"] },
+        "entree": {
+          "type": "object",
+          "required": ["id"],
+          "properties": { "id": { "$ref": "commun.schema.json#/$defs/id_ref" } }
+        }
+      }
+    },
+    "op_affinite": {
+      "type": "object", "required": ["op", "pnj", "valeur"], "additionalProperties": false,
+      "properties": { "op": true, "pnj": { "$ref": "commun.schema.json#/$defs/id_pnj" }, "valeur": { "type": "integer", "minimum": -100, "maximum": 100 }, "souvenir": { "type": "string" } }
+    },
+    "op_souvenir": {
+      "type": "object", "required": ["op", "pnj", "texte"], "additionalProperties": false,
+      "properties": { "op": true, "pnj": { "$ref": "commun.schema.json#/$defs/id_pnj" }, "texte": { "type": "string", "minLength": 1 } }
+    },
+    "op_reputation": {
+      "type": "object", "required": ["op", "faction", "valeur"], "additionalProperties": false,
+      "properties": { "op": true, "faction": { "$ref": "commun.schema.json#/$defs/id_fac" }, "valeur": { "type": "integer", "minimum": -100, "maximum": 100 } }
+    },
+    "op_quete": {
+      "description": "creer : titre et type requis. maj : `etape` ajoute une étape et marque les précédentes faites.",
+      "type": "object", "required": ["op", "action", "id"], "additionalProperties": false,
+      "properties": {
+        "op": true,
+        "action": { "enum": ["creer", "maj", "terminer", "echouer"] },
+        "id": { "$ref": "commun.schema.json#/$defs/id_qst" },
+        "titre": { "type": "string" },
+        "type": { "enum": ["principale", "annexe", "ville", "eveil"] },
+        "description": { "type": "string" },
+        "donneur": { "$ref": "commun.schema.json#/$defs/id_pnj" },
+        "lieu": { "$ref": "commun.schema.json#/$defs/id_lieu" },
+        "etape": { "type": "string" },
+        "recompense": { "type": "string" }
+      },
+      "if": { "properties": { "action": { "const": "creer" } } },
+      "then": { "required": ["titre", "type"] }
+    },
+    "op_lieu": {
+      "description": "deplacer : change partie.json > lieu_actuel. decouverte : ajoute `texte` aux découvertes du lieu. etat : change l'état.",
+      "type": "object", "required": ["op", "action", "id"], "additionalProperties": false,
+      "properties": {
+        "op": true,
+        "action": { "enum": ["deplacer", "decouverte", "etat"] },
+        "id": { "$ref": "commun.schema.json#/$defs/id_lieu" },
+        "texte": { "type": "string" },
+        "etat": { "enum": ["intact", "endommage", "detruit", "controle"] },
+        "controle_par": { "$ref": "commun.schema.json#/$defs/id_fac" }
+      }
+    },
+    "op_evenement": {
+      "description": "Ajoute une ligne à la chronologie (date et session posées par le moteur).",
+      "type": "object", "required": ["op", "importance", "texte"], "additionalProperties": false,
+      "properties": {
+        "op": true,
+        "importance": { "$ref": "commun.schema.json#/$defs/importance" },
+        "texte": { "type": "string", "minLength": 1 },
+        "refs": { "type": "array", "items": { "$ref": "commun.schema.json#/$defs/id_ref" } }
+      }
+    },
+    "op_titre": {
+      "description": "obtenir (défaut) : le titre doit exister dans contenus/titres.json, ou porter `nom`. activer/desactiver : emplacements actifs.",
+      "type": "object", "required": ["op", "id"], "additionalProperties": false,
+      "properties": {
+        "op": true,
+        "id": { "$ref": "commun.schema.json#/$defs/id_tit" },
+        "action": { "enum": ["obtenir", "activer", "desactiver"], "default": "obtenir" },
+        "nom": { "type": "string" },
+        "description": { "type": "string" }
+      }
+    },
+    "op_classe": {
+      "description": "Attribution ou évolution de classe (conditions vérifiées par le moteur).",
+      "type": "object", "required": ["op", "id"], "additionalProperties": false,
+      "properties": { "op": true, "id": { "$ref": "commun.schema.json#/$defs/id_cls" }, "eveil": { "type": "integer", "minimum": 0, "maximum": 4 } }
+    },
+    "op_stat_cachee": {
+      "type": "object", "required": ["op", "cle", "action"], "additionalProperties": false,
+      "properties": {
+        "op": true,
+        "cle": { "type": "string", "pattern": "^[A-Z][A-Za-z]*$" },
+        "action": { "enum": ["debloquer"] },
+        "nom": { "type": "string" },
+        "description": { "type": "string" }
+      }
+    },
+    "op_malus": {
+      "type": "object", "required": ["op", "id", "nom", "jets", "duree_jours"], "additionalProperties": false,
+      "properties": {
+        "op": true,
+        "id": { "$ref": "commun.schema.json#/$defs/slug" },
+        "nom": { "type": "string" },
+        "jets": { "type": "integer", "maximum": 0 },
+        "duree_jours": { "type": "integer", "minimum": 1 }
+      }
+    },
+    "op_destinee": {
+      "description": "Choix irréversible. Refusé si un jeton de `ouvre` ou le choix lui-même est verrouillé (VERROU_DESTINEE).",
+      "type": "object", "required": ["op", "id", "type", "titre", "choix", "ouvre", "verrouille"], "additionalProperties": false,
+      "properties": {
+        "op": true,
+        "id": { "$ref": "commun.schema.json#/$defs/id_dst" },
+        "type": { "enum": ["serment", "allegeance", "voie", "sacrifice", "pnj_cle", "nom_ville", "autre"] },
+        "titre": { "type": "string" },
+        "contexte": { "type": "string" },
+        "choix": { "type": "string" },
+        "alternatives": { "type": "array", "items": { "type": "string" } },
+        "ouvre": { "type": "array", "items": { "$ref": "destinee.schema.json#/$defs/jeton" } },
+        "verrouille": { "type": "array", "items": { "$ref": "destinee.schema.json#/$defs/jeton" } },
+        "refs": { "type": "array", "items": { "$ref": "commun.schema.json#/$defs/id_ref" } }
+      }
+    },
+    "op_jalon": {
+      "type": "object", "required": ["op", "id"], "additionalProperties": false,
+      "properties": { "op": true, "id": { "$ref": "commun.schema.json#/$defs/id_jal" } }
+    },
+    "op_ville": {
+      "description": "debloquer : nom + lieu. habitant : pnj + poste (+ loyaute). jauge : jauge + valeur (variation).",
+      "type": "object", "required": ["op", "action"], "additionalProperties": false,
+      "properties": {
+        "op": true,
+        "action": { "enum": ["debloquer", "habitant", "jauge"] },
+        "nom": { "type": "string" },
+        "lieu": { "$ref": "commun.schema.json#/$defs/id_lieu" },
+        "pnj": { "$ref": "commun.schema.json#/$defs/id_pnj" },
+        "poste": { "type": "string" },
+        "loyaute": { "type": "integer", "minimum": 0, "maximum": 100 },
+        "jauge": { "enum": ["moral", "defense", "renommee", "population"] },
+        "valeur": { "type": "integer" }
+      },
+      "allOf": [
+        { "if": { "properties": { "action": { "const": "debloquer" } } }, "then": { "required": ["nom", "lieu"] } },
+        { "if": { "properties": { "action": { "const": "habitant" } } }, "then": { "required": ["pnj", "poste"] } },
+        { "if": { "properties": { "action": { "const": "jauge" } } }, "then": { "required": ["jauge", "valeur"] } }
+      ]
+    },
+    "op_statut": {
+      "description": "Fin de partie (permadeath) ou reprise.",
+      "type": "object", "required": ["op", "valeur"], "additionalProperties": false,
+      "properties": { "op": true, "valeur": { "enum": ["en_cours", "terminee"] }, "raison": { "type": "string" } }
+    }
+  }
+}

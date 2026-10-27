@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://enclume.local/schemas/codex/noms.schema.json",
+  "title": "codex/noms.json — dictionnaire anti-doublons",
+  "description": "Tous les noms utilisés dans la partie. Un doublon exact est refusé par le moteur.",
+  "type": "object",
+  "required": ["schema_version", "noms"],
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": { "$ref": "../commun.schema.json#/$defs/schema_version" },
+    "noms": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["nom", "type", "connu"],
+        "additionalProperties": false,
+        "properties": {
+          "nom": { "type": "string", "minLength": 1 },
+          "type": { "enum": ["pnj", "lieu", "faction", "region", "objet", "ennemi", "ville", "monde", "autre"] },
+          "ref": { "oneOf": [{ "type": "null" }, { "$ref": "../commun.schema.json#/$defs/id_ref" }] },
+          "connu": { "type": "boolean", "description": "Recopie `connu` de l'entrée référencée : un nom secret ne doit pas fuiter par le dictionnaire." },
+          "culture": { "$ref": "../commun.schema.json#/$defs/slug" },
+          "jour": { "$ref": "../commun.schema.json#/$defs/jour" }
+        }
+      }
+    }
+  }
+}

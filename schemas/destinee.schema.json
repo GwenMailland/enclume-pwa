@@ -1,0 +1,37 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://enclume.local/schemas/destinee.schema.json",
+  "title": "destinee.json — choix irréversibles (GDD §14)",
+  "description": "`ouvre` / `verrouille` contiennent des jetons « type:cible » (ex. \"allegeance:fac_compagnie_du_sel_8d3e\", \"voie:ombre\"). `verrous` est l'union de tous les `verrouille`, consultée par le moteur (VERROU_DESTINEE).",
+  "type": "object",
+  "required": ["schema_version", "choix", "verrous"],
+  "additionalProperties": false,
+  "$defs": {
+    "jeton": { "type": "string", "pattern": "^[a-z_]+:[a-z0-9_]+$" }
+  },
+  "properties": {
+    "schema_version": { "$ref": "commun.schema.json#/$defs/schema_version" },
+    "choix": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "type", "titre", "choix", "date", "session", "ouvre", "verrouille"],
+        "additionalProperties": false,
+        "properties": {
+          "id": { "$ref": "commun.schema.json#/$defs/id_dst" },
+          "type": { "enum": ["serment", "allegeance", "voie", "sacrifice", "pnj_cle", "nom_ville", "autre"] },
+          "titre": { "type": "string" },
+          "contexte": { "type": "string" },
+          "choix": { "type": "string", "description": "Ce que le héros a choisi." },
+          "alternatives": { "type": "array", "items": { "type": "string" }, "description": "Options écartées." },
+          "date": { "$ref": "commun.schema.json#/$defs/date_jeu" },
+          "session": { "type": "integer", "minimum": 1 },
+          "ouvre": { "type": "array", "items": { "$ref": "#/$defs/jeton" } },
+          "verrouille": { "type": "array", "items": { "$ref": "#/$defs/jeton" } },
+          "refs": { "type": "array", "items": { "$ref": "commun.schema.json#/$defs/id_ref" } }
+        }
+      }
+    },
+    "verrous": { "type": "array", "uniqueItems": true, "items": { "$ref": "#/$defs/jeton" } }
+  }
+}

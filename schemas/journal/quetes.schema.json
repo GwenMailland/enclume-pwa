@@ -1,0 +1,46 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://enclume.local/schemas/journal/quetes.schema.json",
+  "title": "journal/quetes.json — quêtes narratives",
+  "description": "Les quêtes du Système sont dans systeme.json.",
+  "type": "object",
+  "required": ["schema_version", "quetes"],
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": { "$ref": "../commun.schema.json#/$defs/schema_version" },
+    "quetes": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "titre", "type", "statut", "etapes", "debut_jour"],
+        "additionalProperties": false,
+        "properties": {
+          "id": { "$ref": "../commun.schema.json#/$defs/id_qst" },
+          "titre": { "type": "string" },
+          "type": { "enum": ["principale", "annexe", "ville", "eveil"] },
+          "statut": { "enum": ["active", "terminee", "echouee"] },
+          "description": { "type": "string" },
+          "donneur": { "$ref": "../commun.schema.json#/$defs/id_pnj" },
+          "lieu": { "$ref": "../commun.schema.json#/$defs/id_lieu" },
+          "etapes": {
+            "description": "Dans l'ordre. L'étape courante est la première non faite.",
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": ["texte", "faite"],
+              "additionalProperties": false,
+              "properties": {
+                "texte": { "type": "string" },
+                "faite": { "type": "boolean" }
+              }
+            }
+          },
+          "recompense": { "type": "string" },
+          "debut_jour": { "$ref": "../commun.schema.json#/$defs/jour" },
+          "fin_jour": { "$ref": "../commun.schema.json#/$defs/jour" },
+          "secret": { "$ref": "../commun.schema.json#/$defs/secret" }
+        }
+      }
+    }
+  }
+}

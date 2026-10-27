@@ -1,0 +1,88 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://enclume.local/schemas/ville.schema.json",
+  "title": "ville.json — la ville du héros (GDD §10)",
+  "description": "Tant que `debloquee` est false, seul ce champ (et schema_version) est requis.",
+  "type": "object",
+  "required": ["schema_version", "debloquee"],
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": { "$ref": "commun.schema.json#/$defs/schema_version" },
+    "debloquee": { "type": "boolean" },
+    "nom": { "type": "string" },
+    "lieu": { "$ref": "commun.schema.json#/$defs/id_lieu" },
+    "palier": { "$ref": "commun.schema.json#/$defs/palier_ville" },
+    "fondee_jour": { "$ref": "commun.schema.json#/$defs/jour" },
+    "dernier_tick_jour": { "$ref": "commun.schema.json#/$defs/jour" },
+    "ressources": {
+      "type": "object",
+      "propertyNames": { "$ref": "commun.schema.json#/$defs/ressource_ville" },
+      "additionalProperties": { "type": "integer", "minimum": 0 }
+    },
+    "ressources_actives": {
+      "description": "Ressources gérées au palier courant (3 au Hameau, toutes à partir du Bourg).",
+      "type": "array",
+      "uniqueItems": true,
+      "items": { "$ref": "commun.schema.json#/$defs/ressource_ville" }
+    },
+    "jauges": {
+      "type": "object",
+      "required": ["population", "moral", "defense", "renommee"],
+      "additionalProperties": false,
+      "properties": {
+        "population": { "type": "integer", "minimum": 0 },
+        "moral": { "type": "integer", "minimum": 0, "maximum": 100 },
+        "defense": { "type": "integer", "minimum": 0 },
+        "renommee": { "type": "integer", "minimum": 0 }
+      }
+    },
+    "menace_raid": { "type": "integer", "minimum": 0, "maximum": 100 },
+    "batiments": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "type", "nom", "niveau"],
+        "additionalProperties": false,
+        "properties": {
+          "id": { "$ref": "commun.schema.json#/$defs/id_bat" },
+          "type": { "$ref": "commun.schema.json#/$defs/slug", "description": "Type de contenus/batiments.json (forge, scierie, hall…)." },
+          "nom": { "type": "string" },
+          "niveau": { "type": "integer", "minimum": 1, "maximum": 5 },
+          "effet": { "type": "string" }
+        }
+      }
+    },
+    "chantiers": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["type", "nom", "niveau_cible", "jours_restants"],
+        "additionalProperties": false,
+        "properties": {
+          "batiment": { "$ref": "commun.schema.json#/$defs/id_bat", "description": "Absent pour une construction neuve." },
+          "type": { "$ref": "commun.schema.json#/$defs/slug" },
+          "nom": { "type": "string" },
+          "niveau_cible": { "type": "integer", "minimum": 1, "maximum": 5 },
+          "jours_restants": { "type": "integer", "minimum": 0 },
+          "debut_jour": { "$ref": "commun.schema.json#/$defs/jour" }
+        }
+      }
+    },
+    "habitants": {
+      "description": "Postes clés tenus par des PNJ du codex.",
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["pnj", "poste"],
+        "additionalProperties": false,
+        "properties": {
+          "pnj": { "$ref": "commun.schema.json#/$defs/id_pnj" },
+          "poste": { "type": "string" },
+          "loyaute": { "type": "integer", "minimum": 0, "maximum": 100 }
+        }
+      }
+    }
+  },
+  "if": { "properties": { "debloquee": { "const": true } } },
+  "then": { "required": ["nom", "lieu", "palier", "fondee_jour", "ressources", "ressources_actives", "jauges", "batiments", "chantiers", "habitants"] }
+}

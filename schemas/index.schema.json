@@ -1,0 +1,32 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://enclume.local/schemas/index.schema.json",
+  "title": "parties/index.json — liste des parties",
+  "description": "Écrit par moteur/stockage.py. Champs dénormalisés pour que l'accueil de la PWA n'ait besoin que de ce fichier.",
+  "type": "object",
+  "required": ["schema_version", "parties"],
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": { "$ref": "commun.schema.json#/$defs/schema_version" },
+    "parties": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "nom", "heros", "niveau", "statut", "session", "date", "maj_le"],
+        "additionalProperties": false,
+        "properties": {
+          "id": { "$ref": "commun.schema.json#/$defs/id_partie" },
+          "nom": { "type": "string" },
+          "heros": { "type": "string" },
+          "niveau": { "type": "integer", "minimum": 1 },
+          "classe": { "type": ["string", "null"], "description": "Nom affichable de la classe, null si aucune." },
+          "lieu": { "type": ["string", "null"], "description": "Nom affichable du lieu actuel." },
+          "statut": { "enum": ["en_cours", "terminee"] },
+          "session": { "type": "integer", "minimum": 0 },
+          "date": { "$ref": "commun.schema.json#/$defs/date_jeu" },
+          "maj_le": { "$ref": "commun.schema.json#/$defs/horodatage" }
+        }
+      }
+    }
+  }
+}

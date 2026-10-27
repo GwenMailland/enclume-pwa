@@ -1,0 +1,121 @@
+{
+  "schema_version": 1,
+  "quetes": [
+    {
+      "id": "qst_cargaison_8d1f",
+      "titre": "La cargaison de Dorran",
+      "type": "principale",
+      "statut": "active",
+      "description": "Une cargaison scellée de la Compagnie du Sel transite par les contrebandiers. Qui l'a commandée ?",
+      "donneur": "pnj_dorran_ase_1c2e",
+      "lieu": "lieu_port_sel_51ac",
+      "debut_jour": 40,
+      "etapes": [
+        {
+          "texte": "Intercepter la cargaison sur le pont du Héron",
+          "faite": true
+        },
+        {
+          "texte": "Décider du sort de Dorran",
+          "faite": true
+        },
+        {
+          "texte": "Retrouver l'acheteur à Port-Sel",
+          "faite": false
+        }
+      ],
+      "secret": "L'acheteur est un intendant de la Compagnie qui stocke l'argent lunaire."
+    },
+    {
+      "id": "qst_relever_hautebrande_3a90",
+      "titre": "Relever Hautebrande",
+      "type": "ville",
+      "statut": "active",
+      "description": "Faire du fort en ruine un refuge.",
+      "lieu": "lieu_hautebrande_6d02",
+      "debut_jour": 34,
+      "etapes": [
+        {
+          "texte": "Chasser les pillards",
+          "faite": true
+        },
+        {
+          "texte": "Rallier des habitants",
+          "faite": true
+        },
+        {
+          "texte": "Couvrir le hall",
+          "faite": true
+        },
+        {
+          "texte": "Élever une palissade",
+          "faite": false
+        }
+      ],
+      "recompense": "Palier Village accessible"
+    },
+    {
+      "id": "qst_acier_qui_chante_71c2",
+      "titre": "L'acier qui chante",
+      "type": "annexe",
+      "statut": "terminee",
+      "description": "Orvan veut voir si tu sais tirer une lame Rare de l'acier noir.",
+      "donneur": "pnj_orvan_braisier_a1c4",
+      "lieu": "lieu_vel_ardhan_08aa",
+      "debut_jour": 22,
+      "fin_jour": 25,
+      "etapes": [
+        {
+          "texte": "Trouver de l'acier noir",
+          "faite": true
+        },
+        {
+          "texte": "Forger une lame Rare",
+          "faite": true
+        }
+      ],
+      "recompense": "Recette : Épée longue"
+    },
+    {
+      "id": "qst_loups_vitres_0d5e",
+      "titre": "Les loups vitrés",
+      "type": "annexe",
+      "statut": "terminee",
+      "description": "Des loups au dos de verre attaquent les convois de Tessa.",
+      "donneur": "pnj_tessa_grisfer_c3a8",
+      "debut_jour": 14,
+      "fin_jour": 16,
+      "etapes": [
+        {
+          "texte": "Pister la meute",
+          "faite": true
+        },
+        {
+          "texte": "Abattre la meute",
+          "faite": true
+        }
+      ],
+      "recompense": "60 or"
+    },
+    {
+      "id": "qst_dette_de_tessa_e612",
+      "titre": "La dette de Tessa",
+      "type": "annexe",
+      "statut": "echouee",
+      "description": "Tessa devait de l'argent à un usurier de Port-Sel. Tu avais promis de l'aider.",
+      "donneur": "pnj_tessa_grisfer_c3a8",
+      "debut_jour": 23,
+      "fin_jour": 31,
+      "etapes": [
+        {
+          "texte": "Trouver l'usurier",
+          "faite": true
+        },
+        {
+          "texte": "Rembourser ou effacer la dette",
+          "faite": false
+        }
+      ]
+    }
+  ]
+}

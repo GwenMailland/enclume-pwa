@@ -1,0 +1,111 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://enclume.local/schemas/contenus/noms.schema.json",
+  "title": "contenus/noms/<culture>.json — une culture de noms",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "culture",
+    "nom",
+    "syllabes",
+    "regles",
+    "exemples"
+  ],
+  "additionalProperties": true,
+  "properties": {
+    "schema_version": {
+      "$ref": "../commun.schema.json#/$defs/schema_version"
+    },
+    "culture": {
+      "$ref": "../commun.schema.json#/$defs/slug"
+    },
+    "nom": {
+      "type": "string",
+      "minLength": 1
+    },
+    "description": {
+      "type": "string",
+      "minLength": 1
+    },
+    "syllabes": {
+      "type": "object",
+      "required": [
+        "debut",
+        "milieu",
+        "fin"
+      ],
+      "properties": {
+        "debut": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "milieu": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "fin": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      }
+    },
+    "regles": {
+      "type": "object",
+      "required": [
+        "syllabes_min",
+        "syllabes_max"
+      ],
+      "properties": {
+        "syllabes_min": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "syllabes_max": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "interdits": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "particules": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      }
+    },
+    "suffixes_lieux": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "exemples": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    }
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://enclume.local/schemas/codex/lieux.schema.json",
+  "title": "codex/lieux.json — lieux",
+  "type": "object",
+  "required": ["schema_version", "entrees"],
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": { "$ref": "../commun.schema.json#/$defs/schema_version" },
+    "entrees": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "nom", "connu", "type", "region", "etat"],
+        "additionalProperties": false,
+        "properties": {
+          "id": { "$ref": "../commun.schema.json#/$defs/id_lieu" },
+          "nom": { "type": "string", "minLength": 1 },
+          "connu": { "type": "boolean" },
+          "type": { "type": "string", "description": "cite, village, port, ruine, site_breche, forge…" },
+          "region": { "$ref": "../commun.schema.json#/$defs/id_reg" },
+          "description": { "type": "string" },
+          "etat": { "enum": ["intact", "endommage", "detruit", "controle"] },
+          "controle_par": { "$ref": "../commun.schema.json#/$defs/id_fac" },
+          "rang_danger": { "$ref": "../commun.schema.json#/$defs/rang" },
+          "decouvertes": { "type": "array", "items": { "type": "string" } },
+          "visite_jour": { "$ref": "../commun.schema.json#/$defs/jour" },
+          "secret": { "$ref": "../commun.schema.json#/$defs/secret" }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,105 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://enclume.local/schemas/contenus/bestiaire.schema.json",
+  "title": "contenus/bestiaire.json — gabarits d'ennemis",
+  "description": "Champs listés requis ; champs supplémentaires tolérés.",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "entrees"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "$ref": "../commun.schema.json#/$defs/schema_version"
+    },
+    "entrees": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "nom",
+          "rang",
+          "type",
+          "pv",
+          "defense",
+          "attaque",
+          "degats",
+          "poids"
+        ],
+        "properties": {
+          "id": {
+            "$ref": "../commun.schema.json#/$defs/id_ene"
+          },
+          "nom": {
+            "type": "string",
+            "minLength": 1
+          },
+          "rang": {
+            "$ref": "../commun.schema.json#/$defs/rang"
+          },
+          "type": {
+            "type": "string",
+            "minLength": 1
+          },
+          "boss": {
+            "type": "boolean"
+          },
+          "pv": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "defense": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "attaque": {
+            "type": "integer"
+          },
+          "degats": {
+            "$ref": "../commun.schema.json#/$defs/des_degats"
+          },
+          "capacites": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "faiblesses": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "resistances": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "butin": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "xp": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "poids": {
+            "type": "number",
+            "exclusiveMinimum": 0,
+            "description": "Poids du tirage pondéré."
+          }
+        }
+      }
+    }
+  }
+}

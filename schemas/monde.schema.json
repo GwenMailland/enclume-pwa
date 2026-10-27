@@ -1,0 +1,119 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://enclume.local/schemas/monde.schema.json",
+  "title": "monde.json — le monde généré (GDD §12)",
+  "description": "Les factions vivent dans codex/factions.json ; leurs horloges ici, dans `fronts`. `secrets` n'est jamais lu par la PWA.",
+  "type": "object",
+  "required": ["schema_version", "nom", "ton", "lore", "regions", "fronts", "arc", "secrets"],
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": { "$ref": "commun.schema.json#/$defs/schema_version" },
+    "nom": { "type": "string" },
+    "ton": { "$ref": "commun.schema.json#/$defs/slug", "description": "id de contenus/monde/tons.json" },
+    "lore": { "type": "string", "description": "Ce que le héros sait du monde." },
+    "regions": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["id", "nom", "biome", "rang", "culture", "connu"],
+        "additionalProperties": false,
+        "properties": {
+          "id": { "$ref": "commun.schema.json#/$defs/id_reg" },
+          "nom": { "type": "string" },
+          "biome": { "type": "string" },
+          "rang": { "$ref": "commun.schema.json#/$defs/rang" },
+          "culture": { "$ref": "commun.schema.json#/$defs/slug", "description": "id d'une culture de contenus/noms/" },
+          "description": { "type": "string" },
+          "connu": { "type": "boolean" },
+          "secret": { "$ref": "commun.schema.json#/$defs/secret" }
+        }
+      }
+    },
+    "fronts": {
+      "description": "Horloges de 4 à 8 segments, avancées par `moteur monde tick` (GDD §12.5).",
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "nom", "source", "segments", "rempli", "connu"],
+        "additionalProperties": false,
+        "properties": {
+          "id": { "$ref": "commun.schema.json#/$defs/id_frt" },
+          "nom": { "type": "string" },
+          "source": { "type": "string", "description": "id fac_ ou \"menace\"." },
+          "segments": { "type": "integer", "minimum": 4, "maximum": 8 },
+          "rempli": { "type": "integer", "minimum": 0 },
+          "dernier_tick_jour": { "$ref": "commun.schema.json#/$defs/jour" },
+          "connu": { "type": "boolean" },
+          "secret": { "$ref": "commun.schema.json#/$defs/secret", "description": "Conséquence quand l'horloge est pleine." }
+        }
+      }
+    },
+    "arc": {
+      "type": "object",
+      "required": ["acte_courant", "actes"],
+      "additionalProperties": false,
+      "properties": {
+        "acte_courant": { "type": "integer", "minimum": 1, "maximum": 5 },
+        "actes": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["numero", "nom", "jalons"],
+            "additionalProperties": false,
+            "properties": {
+              "numero": { "type": "integer", "minimum": 1, "maximum": 5 },
+              "nom": { "type": "string" },
+              "jalons": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "required": ["id", "titre", "atteint"],
+                  "additionalProperties": false,
+                  "properties": {
+                    "id": { "$ref": "commun.schema.json#/$defs/id_jal" },
+                    "titre": { "type": "string" },
+                    "atteint": { "type": "boolean" },
+                    "jour": { "$ref": "commun.schema.json#/$defs/jour" },
+                    "secret": { "$ref": "commun.schema.json#/$defs/secret", "description": "Conditions de déclenchement." }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "secrets": {
+      "description": "Réservé au MJ : menace, mystère du Système, classes cachées et leurs conditions, vrais rôles, lieux cachés, matériaux légendaires.",
+      "type": "object",
+      "properties": {
+        "menace": { "type": "object" },
+        "mystere_systeme": { "type": "object" },
+        "classes_cachees": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["id", "nom", "rang", "conditions"],
+            "properties": {
+              "id": { "$ref": "commun.schema.json#/$defs/id_cls" },
+              "nom": { "type": "string" },
+              "rang": { "$ref": "commun.schema.json#/$defs/rang_classe" },
+              "conditions": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "required": ["texte", "remplie"],
+                  "properties": {
+                    "texte": { "type": "string" },
+                    "remplie": { "type": "boolean" }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

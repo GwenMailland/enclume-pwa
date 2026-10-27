@@ -1,0 +1,179 @@
+{
+  "schema_version": 1,
+  "noms": [
+    {
+      "nom": "Ardanne",
+      "type": "monde",
+      "ref": null,
+      "connu": true
+    },
+    {
+      "nom": "Cendre-Veine",
+      "type": "objet",
+      "ref": "obj_cendre_veine_7c21",
+      "connu": true
+    },
+    {
+      "nom": "Cercle des Cendres",
+      "type": "faction",
+      "ref": "fac_cercle_des_cendres_2a71",
+      "connu": true
+    },
+    {
+      "nom": "Compagnie du Sel",
+      "type": "faction",
+      "ref": "fac_compagnie_du_sel_8d3e",
+      "connu": true
+    },
+    {
+      "nom": "Crocs d'Hiver",
+      "type": "region",
+      "ref": "reg_crocs_d_hiver",
+      "connu": false
+    },
+    {
+      "nom": "Côtes de Sel",
+      "type": "region",
+      "ref": "reg_cotes_de_sel",
+      "connu": true
+    },
+    {
+      "nom": "Dorran Asé",
+      "type": "pnj",
+      "ref": "pnj_dorran_ase_1c2e",
+      "connu": true
+    },
+    {
+      "nom": "Forge-sans-Flamme",
+      "type": "lieu",
+      "ref": "lieu_forge_sans_flamme_f001",
+      "connu": false
+    },
+    {
+      "nom": "Gardien de vitre",
+      "type": "ennemi",
+      "ref": "ene_gardien_de_vitre",
+      "connu": true
+    },
+    {
+      "nom": "Gouffre de Vitre",
+      "type": "lieu",
+      "ref": "lieu_gouffre_de_vitre_e7a9",
+      "connu": true
+    },
+    {
+      "nom": "Hauldren Sans-Flamme",
+      "type": "pnj",
+      "ref": "pnj_hauldren_sans_flamme_0bb1",
+      "connu": false
+    },
+    {
+      "nom": "Hautebrande",
+      "type": "ville",
+      "ref": "lieu_hautebrande_6d02",
+      "connu": true
+    },
+    {
+      "nom": "Héron Gris",
+      "type": "autre",
+      "ref": null,
+      "connu": true
+    },
+    {
+      "nom": "Ilan Corbelet",
+      "type": "pnj",
+      "ref": "pnj_ilan_corbelet_9e2d",
+      "connu": true
+    },
+    {
+      "nom": "Lame chantante",
+      "type": "objet",
+      "ref": "obj_lame_chantante_5e3d",
+      "connu": true
+    },
+    {
+      "nom": "Landes vitrées",
+      "type": "region",
+      "ref": "reg_landes_vitrees",
+      "connu": true
+    },
+    {
+      "nom": "Marche de Braise",
+      "type": "region",
+      "ref": "reg_marche_de_braise",
+      "connu": true
+    },
+    {
+      "nom": "Marteau sans Flamme",
+      "type": "objet",
+      "ref": "obj_marteau_sans_flamme_ff02",
+      "connu": false
+    },
+    {
+      "nom": "Marées Noires",
+      "type": "faction",
+      "ref": "fac_marees_noires_77b0",
+      "connu": true
+    },
+    {
+      "nom": "Maëlis Tisserand",
+      "type": "pnj",
+      "ref": "pnj_maelis_tisserand_3f9a",
+      "connu": true
+    },
+    {
+      "nom": "Murmure-de-Fer",
+      "type": "objet",
+      "ref": "obj_murmure_de_fer_a90e",
+      "connu": true
+    },
+    {
+      "nom": "Orvan Braisier",
+      "type": "pnj",
+      "ref": "pnj_orvan_braisier_a1c4",
+      "connu": true
+    },
+    {
+      "nom": "Port-Sel",
+      "type": "lieu",
+      "ref": "lieu_port_sel_51ac",
+      "connu": true
+    },
+    {
+      "nom": "Roi-sous-Verre",
+      "type": "autre",
+      "ref": null,
+      "connu": false
+    },
+    {
+      "nom": "Sévrine Cade",
+      "type": "pnj",
+      "ref": "pnj_sevrine_cade_5b07",
+      "connu": true
+    },
+    {
+      "nom": "Tessa Grisfer",
+      "type": "pnj",
+      "ref": "pnj_tessa_grisfer_c3a8",
+      "connu": true
+    },
+    {
+      "nom": "Val des Cendres",
+      "type": "region",
+      "ref": "reg_val_des_cendres",
+      "connu": true
+    },
+    {
+      "nom": "Varek Ombrelune",
+      "type": "pnj",
+      "ref": "pnj_varek_ombrelune_44f0",
+      "connu": true
+    },
+    {
+      "nom": "Vel-Ardhan",
+      "type": "lieu",
+      "ref": "lieu_vel_ardhan_08aa",
+      "connu": true
+    }
+  ]
+}

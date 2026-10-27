@@ -1,0 +1,75 @@
+{
+  "schema_version": 1,
+  "debloquee": true,
+  "nom": "Hautebrande",
+  "lieu": "lieu_hautebrande_6d02",
+  "palier": "hameau",
+  "fondee_jour": 35,
+  "dernier_tick_jour": 41,
+  "ressources": {
+    "bois": 46,
+    "pierre": 31,
+    "vivres": 58
+  },
+  "ressources_actives": [
+    "bois",
+    "pierre",
+    "vivres"
+  ],
+  "jauges": {
+    "population": 14,
+    "moral": 62,
+    "defense": 8,
+    "renommee": 5
+  },
+  "menace_raid": 15,
+  "batiments": [
+    {
+      "id": "bat_hall_hb_01",
+      "type": "hall",
+      "nom": "Hall de Hautebrande",
+      "niveau": 1,
+      "effet": "Débloque le palier Hameau"
+    },
+    {
+      "id": "bat_forge_hb_02",
+      "type": "forge",
+      "nom": "Forge du donjon",
+      "niveau": 1,
+      "effet": "+1 au jet de forge"
+    },
+    {
+      "id": "bat_scierie_hb_03",
+      "type": "scierie",
+      "nom": "Scierie du ruisseau",
+      "niveau": 1,
+      "effet": "+4 bois par jour"
+    }
+  ],
+  "chantiers": [
+    {
+      "type": "muraille",
+      "nom": "Palissade",
+      "niveau_cible": 1,
+      "jours_restants": 3,
+      "debut_jour": 38
+    }
+  ],
+  "habitants": [
+    {
+      "pnj": "pnj_maelis_tisserand_3f9a",
+      "poste": "intendante",
+      "loyaute": 70
+    },
+    {
+      "pnj": "pnj_sevrine_cade_5b07",
+      "poste": "capitaine",
+      "loyaute": 55
+    },
+    {
+      "pnj": "pnj_orvan_braisier_a1c4",
+      "poste": "forgeron en chef",
+      "loyaute": 80
+    }
+  ]
+}

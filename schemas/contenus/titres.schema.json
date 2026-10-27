@@ -1,0 +1,57 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://enclume.local/schemas/contenus/titres.schema.json",
+  "title": "contenus/titres.json",
+  "description": "Champs listés requis ; champs supplémentaires tolérés.",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "entrees"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "$ref": "../commun.schema.json#/$defs/schema_version"
+    },
+    "entrees": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "nom",
+          "condition",
+          "bonus"
+        ],
+        "properties": {
+          "id": {
+            "$ref": "../commun.schema.json#/$defs/id_tit"
+          },
+          "nom": {
+            "type": "string",
+            "minLength": 1
+          },
+          "condition": {
+            "type": "string",
+            "minLength": 1
+          },
+          "bonus": {
+            "$ref": "../commun.schema.json#/$defs/bonus"
+          },
+          "effet": {
+            "type": "string",
+            "minLength": 1
+          },
+          "debloque": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            }
+          }
+        }
+      }
+    }
+  }
+}

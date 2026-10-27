@@ -1,0 +1,116 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://enclume.local/schemas/commun.schema.json",
+  "title": "Définitions communes",
+  "description": "Types partagés par tous les schémas. Voir ARCHITECTURE §3.1.",
+  "$defs": {
+    "schema_version": { "const": 1 },
+    "slug": { "type": "string", "pattern": "^[a-z0-9]+(_[a-z0-9]+)*$" },
+
+    "id_pnj": { "type": "string", "pattern": "^pnj_[a-z0-9]+(_[a-z0-9]+)*$" },
+    "id_lieu": { "type": "string", "pattern": "^lieu_[a-z0-9]+(_[a-z0-9]+)*$" },
+    "id_fac": { "type": "string", "pattern": "^fac_[a-z0-9]+(_[a-z0-9]+)*$" },
+    "id_obj": { "type": "string", "pattern": "^obj_[a-z0-9]+(_[a-z0-9]+)*$" },
+    "id_mat": { "type": "string", "pattern": "^mat_[a-z0-9]+(_[a-z0-9]+)*$" },
+    "id_rec": { "type": "string", "pattern": "^rec_[a-z0-9]+(_[a-z0-9]+)*$" },
+    "id_qst": { "type": "string", "pattern": "^qst_[a-z0-9]+(_[a-z0-9]+)*$" },
+    "id_evt": { "type": "string", "pattern": "^evt_[a-z0-9]+(_[a-z0-9]+)*$" },
+    "id_bat": { "type": "string", "pattern": "^bat_[a-z0-9]+(_[a-z0-9]+)*$" },
+    "id_cmp": { "type": "string", "pattern": "^cmp_[a-z0-9]+(_[a-z0-9]+)*$" },
+    "id_tit": { "type": "string", "pattern": "^tit_[a-z0-9]+(_[a-z0-9]+)*$" },
+    "id_ene": { "type": "string", "pattern": "^ene_[a-z0-9]+(_[a-z0-9]+)*$" },
+    "id_brc": { "type": "string", "pattern": "^brc_[a-z0-9]+(_[a-z0-9]+)*$" },
+    "id_cls": { "type": "string", "pattern": "^cls_[a-z0-9]+(_[a-z0-9]+)*$" },
+    "id_dst": { "type": "string", "pattern": "^dst_[a-z0-9]+(_[a-z0-9]+)*$" },
+    "id_reg": { "type": "string", "pattern": "^reg_[a-z0-9]+(_[a-z0-9]+)*$" },
+    "id_afx": { "type": "string", "pattern": "^afx_[a-z0-9]+(_[a-z0-9]+)*$" },
+    "id_frt": { "type": "string", "pattern": "^frt_[a-z0-9]+(_[a-z0-9]+)*$" },
+    "id_jal": { "type": "string", "pattern": "^jal_[a-z0-9]+(_[a-z0-9]+)*$" },
+    "id_quo": { "type": "string", "pattern": "^quo_[a-z0-9]+(_[a-z0-9]+)*$" },
+    "id_ref": {
+      "description": "N'importe quel ID préfixé (références croisées).",
+      "type": "string",
+      "pattern": "^(pnj|lieu|fac|obj|mat|rec|qst|evt|bat|cmp|tit|ene|brc|cls|dst|reg|afx|frt|jal|quo)_[a-z0-9]+(_[a-z0-9]+)*$"
+    },
+    "id_partie": { "type": "string", "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$" },
+
+    "saison": { "enum": ["printemps", "ete", "automne", "hiver"] },
+    "moment": { "enum": ["aube", "matin", "midi", "apres_midi", "crepuscule", "nuit"] },
+    "date_jeu": {
+      "description": "Date du jeu. `jour` est absolu (compteur depuis le début de la partie, à partir de 1).",
+      "type": "object",
+      "required": ["annee", "saison", "jour", "moment"],
+      "additionalProperties": false,
+      "properties": {
+        "annee": { "type": "integer", "minimum": 1 },
+        "saison": { "$ref": "#/$defs/saison" },
+        "jour": { "type": "integer", "minimum": 1 },
+        "moment": { "$ref": "#/$defs/moment" }
+      }
+    },
+    "jour": { "type": "integer", "minimum": 1 },
+    "horodatage": { "type": "string", "format": "date-time" },
+
+    "stat": { "enum": ["FOR", "AGI", "END", "INT", "DEX", "VOL", "CHA"] },
+    "rang": { "description": "Rang F→S (zones, brèches, matériaux, ennemis, Système).", "enum": ["F", "E", "D", "C", "B", "A", "S"] },
+    "rang_classe": { "enum": ["Commune", "Avancee", "Rare", "Heroique", "Legendaire", "Mythique"] },
+    "qualite": { "enum": ["Ordinaire", "Fine", "Rare", "Epique", "Unique", "Legendaire"] },
+    "qualite_forge": { "description": "Résultat d'un jet de forge (GDD §9.2), `Ratee` comprise.", "enum": ["Ratee", "Ordinaire", "Fine", "Rare", "Epique", "Unique", "Legendaire"] },
+    "degre": { "description": "Degré de réussite (GDD §4.2).", "enum": ["critique", "eclatant", "succes", "succes_cout", "echec", "fiasco"] },
+    "importance": { "type": "integer", "minimum": 1, "maximum": 3 },
+    "affinite": { "type": "integer", "minimum": -100, "maximum": 100 },
+    "palier_ville": { "enum": ["campement", "hameau", "village", "bourg", "ville", "cite"] },
+    "ressource_ville": { "enum": ["bois", "pierre", "minerai", "vivres", "or", "cristaux"] },
+    "type_objet": { "enum": ["arme", "armure", "bouclier", "accessoire", "outil", "consommable", "quete", "divers"] },
+    "emplacement": { "enum": ["arme_principale", "arme_secondaire", "tete", "torse", "mains", "jambes", "pieds", "amulette", "anneau_1", "anneau_2"] },
+    "des_degats": { "type": "string", "pattern": "^[0-9]+d[0-9]+([+-][0-9]+)?$" },
+
+    "secret": {
+      "description": "Information réservée au MJ. Jamais affichée par la PWA (filtrée récursivement).",
+      "type": ["string", "object", "array"]
+    },
+    "cout": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "pm": { "type": "integer", "minimum": 0 },
+        "end": { "type": "integer", "minimum": 0 }
+      }
+    },
+    "bonus": {
+      "description": "Bonus chiffrés (titre, classe, objet, affixe). Clés : stats, dérivées ou effets nommés.",
+      "type": "object",
+      "additionalProperties": { "type": "number" }
+    },
+    "affixe": {
+      "type": "object",
+      "required": ["id", "nom", "effet"],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "$ref": "#/$defs/id_afx" },
+        "nom": { "type": "string" },
+        "effet": { "type": "string" },
+        "bonus": { "$ref": "#/$defs/bonus" }
+      }
+    },
+    "souvenir": {
+      "type": "object",
+      "required": ["jour", "texte"],
+      "additionalProperties": false,
+      "properties": {
+        "jour": { "$ref": "#/$defs/jour" },
+        "texte": { "type": "string", "minLength": 1 }
+      }
+    },
+    "quantite_materiau": {
+      "type": "object",
+      "required": ["id", "quantite"],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "$ref": "#/$defs/id_mat" },
+        "nom": { "type": "string" },
+        "quantite": { "type": "integer", "minimum": 1 }
+      }
+    }
+  }
+}

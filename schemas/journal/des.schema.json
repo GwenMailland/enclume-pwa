@@ -1,0 +1,68 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://enclume.local/schemas/journal/des.schema.json",
+  "title": "journal/des.jsonl — UNE ligne (un jet)",
+  "description": "JSON Lines, ordre chronologique. total = garde + mod + competence.niveau + somme(bonus) ; marge = total − dd (GDD §4).",
+  "type": "object",
+  "required": ["n", "session", "jour", "type", "des", "garde", "total", "raison"],
+  "additionalProperties": false,
+  "properties": {
+    "n": { "type": "integer", "minimum": 1, "description": "Numéro séquentiel du jet dans la partie." },
+    "session": { "type": "integer", "minimum": 1 },
+    "jour": { "$ref": "../commun.schema.json#/$defs/jour" },
+    "type": { "enum": ["jet", "oppose", "attaque", "degats", "initiative", "forge", "enchantement"] },
+    "stat": { "$ref": "../commun.schema.json#/$defs/stat" },
+    "mod": { "type": "integer", "description": "Modificateur de la stat." },
+    "competence": {
+      "type": "object",
+      "required": ["id", "niveau"],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "type": "string", "description": "id cmp_ ou métier (\"forge\", \"enchantement\")." },
+        "nom": { "type": "string" },
+        "niveau": { "type": "integer", "minimum": 0 }
+      }
+    },
+    "bonus": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["source", "valeur"],
+        "additionalProperties": false,
+        "properties": {
+          "source": { "type": "string" },
+          "valeur": { "type": "integer" }
+        }
+      }
+    },
+    "avantage": { "enum": ["aucun", "avantage", "desavantage"] },
+    "des": { "type": "array", "minItems": 1, "items": { "type": "integer", "minimum": 1 }, "description": "Dés lancés (2 d20 en cas d'avantage/désavantage ; dés de dégâts sinon)." },
+    "garde": { "type": "integer", "minimum": 1, "description": "Valeur retenue (d20 naturel, ou somme pour les dégâts)." },
+    "total": { "type": "integer" },
+    "dd": { "type": "integer" },
+    "marge": { "type": "integer" },
+    "degre": { "$ref": "../commun.schema.json#/$defs/degre" },
+    "qualite": { "$ref": "../commun.schema.json#/$defs/qualite_forge" },
+    "adversaire": {
+      "type": "object",
+      "required": ["nom", "total"],
+      "additionalProperties": false,
+      "properties": {
+        "nom": { "type": "string" },
+        "total": { "type": "integer" }
+      }
+    },
+    "usage": {
+      "description": "Effet sur le compteur d'usage (GDD §3.5).",
+      "type": "object",
+      "required": ["stat", "compteur", "monte"],
+      "additionalProperties": false,
+      "properties": {
+        "stat": { "$ref": "../commun.schema.json#/$defs/stat" },
+        "compteur": { "type": "integer", "minimum": 0 },
+        "monte": { "type": "boolean" }
+      }
+    },
+    "raison": { "type": "string" }
+  }
+}

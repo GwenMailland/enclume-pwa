@@ -1,0 +1,152 @@
+{
+  "schema_version": 1,
+  "nom": "Aldric",
+  "origine": "apprenti_forgeron",
+  "niveau": 7,
+  "xp": 1340,
+  "points_stat": 2,
+  "points_competence": 1,
+  "stats": {
+    "FOR": 15,
+    "AGI": 13,
+    "END": 14,
+    "INT": 15,
+    "DEX": 19,
+    "VOL": 11,
+    "CHA": 12
+  },
+  "usage": {
+    "FOR": 6,
+    "AGI": 3,
+    "END": 0,
+    "INT": 11,
+    "DEX": 21,
+    "VOL": 1,
+    "CHA": 4
+  },
+  "stats_cachees": {
+    "Resonance": {
+      "nom": "Résonance",
+      "valeur": 3,
+      "debloquee": true,
+      "description": "Lien entre toi et une arme née de tes mains."
+    },
+    "Tenacite": {
+      "nom": "Ténacité",
+      "valeur": 2,
+      "debloquee": false
+    }
+  },
+  "ressources": {
+    "pv": 71,
+    "pm": 38,
+    "end": 6
+  },
+  "classe": {
+    "id": "cls_lame_errante",
+    "nom": "Lame errante",
+    "rang": "Commune",
+    "eveil": 0,
+    "bonus": {
+      "AGI": 1
+    }
+  },
+  "metiers": {
+    "forge": 3,
+    "enchantement": 1,
+    "batisseur": 1
+  },
+  "competences": [
+    {
+      "id": "cmp_frappe_enclume",
+      "nom": "Frappe de l'enclume",
+      "type": "active",
+      "niveau": 2,
+      "xp": 40,
+      "stat": "FOR",
+      "cout": {
+        "end": 2
+      },
+      "recharge": 2,
+      "description": "Un coup vertical porté comme sur l'enclume : +1d6 dégâts, peut fendre une garde.",
+      "source": "Maître Orvan"
+    },
+    {
+      "id": "cmp_lame_courte",
+      "nom": "Maniement des lames courtes",
+      "type": "passive",
+      "niveau": 2,
+      "xp": 65,
+      "stat": "AGI",
+      "description": "+niveau aux jets d'attaque avec dague ou épée courte.",
+      "source": "Classe"
+    },
+    {
+      "id": "cmp_trait_de_braise",
+      "nom": "Trait de braise",
+      "type": "active",
+      "niveau": 1,
+      "xp": 15,
+      "stat": "INT",
+      "cout": {
+        "pm": 4
+      },
+      "recharge": 1,
+      "description": "Projette une escarbille brûlante à 10 m : 1d8 feu.",
+      "source": "Ilan Corbelet"
+    },
+    {
+      "id": "cmp_oeil_du_metal",
+      "nom": "Œil du métal",
+      "type": "metier",
+      "niveau": 1,
+      "xp": 30,
+      "stat": "INT",
+      "description": "Identifier alliage, origine et défauts d'un objet métallique.",
+      "source": "Origine"
+    }
+  ],
+  "titres": {
+    "actifs": [
+      "tit_survivant_breche",
+      "tit_premiere_lame"
+    ],
+    "obtenus": [
+      {
+        "id": "tit_premiere_lame",
+        "nom": "Première lame",
+        "jour": 3,
+        "description": "Tu as forgé ta première arme.",
+        "bonus": {
+          "forge": 1
+        }
+      },
+      {
+        "id": "tit_revenant",
+        "nom": "Revenant",
+        "jour": 21,
+        "description": "La mort t'a rendu. Elle n'a pas dit pourquoi.",
+        "bonus": {
+          "VOL": 1
+        }
+      },
+      {
+        "id": "tit_survivant_breche",
+        "nom": "Survivant de brèche",
+        "jour": 31,
+        "description": "Tu as fermé une brèche et tu en es sorti vivant.",
+        "bonus": {
+          "END": 1
+        }
+      }
+    ]
+  },
+  "malus": [
+    {
+      "id": "fatigue_de_forge",
+      "nom": "Fatigue de forge",
+      "jets": -1,
+      "jusqua_jour": 42
+    }
+  ]
+}

@@ -1,0 +1,39 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://enclume.local/schemas/codex/bestiaire.schema.json",
+  "title": "codex/bestiaire.json — ennemis rencontrés",
+  "type": "object",
+  "required": ["schema_version", "entrees"],
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": { "$ref": "../commun.schema.json#/$defs/schema_version" },
+    "entrees": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "nom", "connu", "rang", "type"],
+        "additionalProperties": false,
+        "properties": {
+          "id": { "$ref": "../commun.schema.json#/$defs/id_ene" },
+          "nom": { "type": "string", "minLength": 1 },
+          "connu": { "type": "boolean" },
+          "rang": { "$ref": "../commun.schema.json#/$defs/rang" },
+          "type": { "type": "string", "description": "bete, humanoide, mort_vivant, elementaire, aberration…" },
+          "boss": { "type": "boolean" },
+          "description": { "type": "string" },
+          "pv": { "type": "integer", "minimum": 1 },
+          "defense": { "type": "integer", "minimum": 0 },
+          "attaque": { "type": "integer" },
+          "degats": { "$ref": "../commun.schema.json#/$defs/des_degats" },
+          "capacites": { "type": "array", "items": { "type": "string" } },
+          "faiblesses": { "type": "array", "items": { "type": "string" } },
+          "resistances": { "type": "array", "items": { "type": "string" } },
+          "rencontres": { "type": "integer", "minimum": 0 },
+          "vaincus": { "type": "integer", "minimum": 0 },
+          "premiere_rencontre_jour": { "$ref": "../commun.schema.json#/$defs/jour" },
+          "secret": { "$ref": "../commun.schema.json#/$defs/secret" }
+        }
+      }
+    }
+  }
+}

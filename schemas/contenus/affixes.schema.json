@@ -1,0 +1,68 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://enclume.local/schemas/contenus/affixes.schema.json",
+  "title": "contenus/affixes.json",
+  "description": "Champs listés requis ; champs supplémentaires tolérés.",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "entrees"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "$ref": "../commun.schema.json#/$defs/schema_version"
+    },
+    "entrees": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "nom",
+          "effet",
+          "qualite_min",
+          "poids"
+        ],
+        "properties": {
+          "id": {
+            "$ref": "../commun.schema.json#/$defs/id_afx"
+          },
+          "nom": {
+            "type": "string",
+            "minLength": 1
+          },
+          "effet": {
+            "type": "string",
+            "minLength": 1
+          },
+          "bonus": {
+            "$ref": "../commun.schema.json#/$defs/bonus"
+          },
+          "qualite_min": {
+            "$ref": "../commun.schema.json#/$defs/qualite"
+          },
+          "types": {
+            "type": "array",
+            "items": {
+              "$ref": "../commun.schema.json#/$defs/type_objet"
+            }
+          },
+          "proprietes": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "number"
+            },
+            "description": "Propriété de matériau → multiplicateur de poids."
+          },
+          "poids": {
+            "type": "number",
+            "exclusiveMinimum": 0,
+            "description": "Poids du tirage pondéré."
+          }
+        }
+      }
+    }
+  }
+}

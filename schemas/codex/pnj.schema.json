@@ -1,0 +1,53 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://enclume.local/schemas/codex/pnj.schema.json",
+  "title": "codex/pnj.json — personnages (GDD §13)",
+  "type": "object",
+  "required": ["schema_version", "entrees"],
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": { "$ref": "../commun.schema.json#/$defs/schema_version" },
+    "entrees": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "nom", "connu", "role", "statut", "affinite", "vivant", "souvenirs"],
+        "additionalProperties": false,
+        "properties": {
+          "id": { "$ref": "../commun.schema.json#/$defs/id_pnj" },
+          "nom": { "type": "string", "minLength": 1 },
+          "connu": { "type": "boolean" },
+          "role": { "type": "string" },
+          "metier": { "type": "string" },
+          "culture": { "$ref": "../commun.schema.json#/$defs/slug" },
+          "lieu": { "$ref": "../commun.schema.json#/$defs/id_lieu" },
+          "faction": { "$ref": "../commun.schema.json#/$defs/id_fac" },
+          "statut": { "enum": ["inconnu", "connaissance", "ami", "allie", "rival", "ennemi", "mentor", "amour"] },
+          "affinite": { "$ref": "../commun.schema.json#/$defs/affinite" },
+          "vivant": { "type": "boolean" },
+          "apparence": { "type": "string" },
+          "trait": { "type": "string" },
+          "desir": { "type": "string" },
+          "peur": { "type": "string" },
+          "voix": { "type": "string", "description": "Registre et tics de langage." },
+          "souvenirs": { "type": "array", "maxItems": 10, "items": { "$ref": "../commun.schema.json#/$defs/souvenir" } },
+          "dernier_echange": { "$ref": "../commun.schema.json#/$defs/souvenir" },
+          "liens": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": ["cible", "nature"],
+              "additionalProperties": false,
+              "properties": {
+                "cible": { "$ref": "../commun.schema.json#/$defs/id_ref" },
+                "nature": { "type": "string" }
+              }
+            }
+          },
+          "premiere_rencontre_jour": { "$ref": "../commun.schema.json#/$defs/jour" },
+          "secret": { "$ref": "../commun.schema.json#/$defs/secret" }
+        }
+      }
+    }
+  }
+}

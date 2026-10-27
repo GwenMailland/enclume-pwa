@@ -1,0 +1,41 @@
+{
+  "schema_version": 1,
+  "entrees": [
+    {
+      "id": "obj_cendre_veine_7c21",
+      "nom": "Cendre-Veine",
+      "connu": true,
+      "type": "arme",
+      "qualite": "Unique",
+      "description": "Épée longue d'acier noir veinée d'argent lunaire ; une lueur rouge court sous le fil.",
+      "histoire": "Forgée à Hautebrande la nuit où le hall fut couvert, avec le cœur arraché au Gardien de vitre. Orvan a tenu la pince ; Aldric a frappé seul. Quand la lame a touché l'eau, la forge entière a chanté.",
+      "porteur": "heros",
+      "createur": "heros",
+      "decouvert_jour": 39
+    },
+    {
+      "id": "obj_murmure_de_fer_a90e",
+      "nom": "Murmure-de-Fer",
+      "connu": true,
+      "type": "arme",
+      "qualite": "Unique",
+      "description": "Dague sombre et silencieuse ; la garde porte une flamme éteinte.",
+      "histoire": "Trouvée dans la poitrine de verre du Gardien du Gouffre. Personne ne sait qui l'a forgée.",
+      "porteur": "heros",
+      "createur": null,
+      "decouvert_jour": 31,
+      "secret": "Forgée par Hauldren Sans-Flamme."
+    },
+    {
+      "id": "obj_marteau_sans_flamme_ff02",
+      "nom": "Marteau sans Flamme",
+      "connu": false,
+      "type": "outil",
+      "qualite": "Legendaire",
+      "description": "Le marteau de Hauldren.",
+      "porteur": "pnj_hauldren_sans_flamme_0bb1",
+      "lieu": "lieu_forge_sans_flamme_f001",
+      "secret": "Qui le reçoit des mains de Hauldren peut forger des objets Légendaires sans matériau légendaire."
+    }
+  ]
+}

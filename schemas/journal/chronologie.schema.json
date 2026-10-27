@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://enclume.local/schemas/journal/chronologie.schema.json",
+  "title": "journal/chronologie.jsonl — UNE ligne",
+  "description": "Le fichier est en JSON Lines : chaque ligne est validée séparément contre ce schéma. Ordre chronologique.",
+  "type": "object",
+  "required": ["id", "date", "session", "importance", "texte", "refs"],
+  "additionalProperties": false,
+  "properties": {
+    "id": { "$ref": "../commun.schema.json#/$defs/id_evt" },
+    "date": { "$ref": "../commun.schema.json#/$defs/date_jeu" },
+    "session": { "type": "integer", "minimum": 1 },
+    "importance": { "$ref": "../commun.schema.json#/$defs/importance" },
+    "texte": { "type": "string", "minLength": 1 },
+    "refs": { "type": "array", "items": { "$ref": "../commun.schema.json#/$defs/id_ref" } }
+  }
+}

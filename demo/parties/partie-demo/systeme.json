@@ -1,0 +1,103 @@
+{
+  "schema_version": 1,
+  "rang": "E",
+  "quotidiennes": {
+    "jour": 41,
+    "taches": [
+      {
+        "id": "quo_frappes_enclume",
+        "texte": "Frappes à l'enclume",
+        "objectif": 100,
+        "progression": 60,
+        "unite": "frappes"
+      },
+      {
+        "id": "quo_course",
+        "texte": "Courir",
+        "objectif": 10,
+        "progression": 10,
+        "unite": "km"
+      },
+      {
+        "id": "quo_meditation",
+        "texte": "Méditer près du feu",
+        "objectif": 30,
+        "progression": 0,
+        "unite": "minutes"
+      }
+    ],
+    "recompense": "+2 points de stat",
+    "penalite": "ÉPREUVE DE PÉNALITÉ",
+    "statut": "en_cours"
+  },
+  "bilan_quotidiennes": {
+    "accomplies": 37,
+    "echouees": 2,
+    "serie": 6
+  },
+  "quetes": [
+    {
+      "id": "qst_systeme_premier_sang_0a11",
+      "titre": "Premier sang",
+      "type": "arc",
+      "statut": "terminee",
+      "description": "Vaincre une créature hostile.",
+      "recompense": "Accès à la fenêtre de statut"
+    },
+    {
+      "id": "qst_systeme_crocs_d_ecume_b7f5",
+      "titre": "Fermer la brèche des Crocs d'Écume",
+      "type": "urgente",
+      "statut": "active",
+      "description": "Une brèche de rang D s'est ouverte sur les Côtes de Sel.",
+      "echeance_jour": 55,
+      "recompense": "Réévaluation du rang",
+      "echec": "Débordement : la région passe au rang D"
+    },
+    {
+      "id": "qst_systeme_condition_cachee_9f00",
+      "titre": "Condition cachée détectée",
+      "type": "cachee",
+      "statut": "active",
+      "description": "« Une flamme qui ne brûle pas attend son héritier. »"
+    }
+  ],
+  "breches": [
+    {
+      "id": "brc_gouffre_de_vitre_e1a2",
+      "nom": "Brèche du Gouffre de Vitre",
+      "rang": "E",
+      "region": "reg_landes_vitrees",
+      "lieu": "lieu_gouffre_de_vitre_e7a9",
+      "etat": "fermee",
+      "apparue_jour": 18,
+      "debordement_jour": 33,
+      "fermee_jour": 31,
+      "etages": 3,
+      "etage_atteint": 3
+    },
+    {
+      "id": "brc_crocs_d_ecume_b7f4",
+      "nom": "Brèche des Crocs d'Écume",
+      "rang": "D",
+      "region": "reg_cotes_de_sel",
+      "etat": "ouverte",
+      "apparue_jour": 40,
+      "debordement_jour": 55,
+      "etages": 5,
+      "etage_atteint": 0
+    }
+  ],
+  "penalites": [
+    {
+      "jour": 20,
+      "raison": "Quotidienne du jour 19 ignorée",
+      "statut": "survecue"
+    },
+    {
+      "jour": 28,
+      "raison": "Quotidienne du jour 27 ignorée",
+      "statut": "survecue"
+    }
+  ]
+}

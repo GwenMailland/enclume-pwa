@@ -1,0 +1,102 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://enclume.local/schemas/contenus/recettes.schema.json",
+  "title": "contenus/recettes.json",
+  "description": "Champs listés requis ; champs supplémentaires tolérés.",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "entrees"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "$ref": "../commun.schema.json#/$defs/schema_version"
+    },
+    "entrees": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "nom",
+          "type",
+          "materiaux",
+          "heures"
+        ],
+        "properties": {
+          "id": {
+            "$ref": "../commun.schema.json#/$defs/id_rec"
+          },
+          "nom": {
+            "type": "string",
+            "minLength": 1
+          },
+          "type": {
+            "$ref": "../commun.schema.json#/$defs/type_objet"
+          },
+          "sous_type": {
+            "type": "string",
+            "minLength": 1
+          },
+          "materiaux": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "type": "object",
+              "required": [
+                "quantite"
+              ],
+              "properties": {
+                "id": {
+                  "$ref": "../commun.schema.json#/$defs/id_mat"
+                },
+                "propriete": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "rang_min": {
+                  "$ref": "../commun.schema.json#/$defs/rang"
+                },
+                "quantite": {
+                  "type": "integer",
+                  "minimum": 1
+                }
+              }
+            }
+          },
+          "heures": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 12
+          },
+          "maitrise_min": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "base": {
+            "type": "object",
+            "required": [],
+            "properties": {
+              "degats": {
+                "$ref": "../commun.schema.json#/$defs/des_degats"
+              },
+              "defense": {
+                "type": "integer",
+                "minimum": 0
+              },
+              "stat_attaque": {
+                "enum": [
+                  "FOR",
+                  "AGI",
+                  "INT"
+                ]
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

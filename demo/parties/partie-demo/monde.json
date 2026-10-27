@@ -1,0 +1,242 @@
+{
+  "schema_version": 1,
+  "nom": "Ardanne",
+  "ton": "heroique_sombre",
+  "lore": "Ardanne est une terre de forges et de marais salants. Il y a trois siècles, le Silence a éteint les grands foyers ; depuis, les brèches s'ouvrent, et une voix froide — le Système — choisit certains mortels pour les refermer.",
+  "regions": [
+    {
+      "id": "reg_marche_de_braise",
+      "nom": "Marche de Braise",
+      "biome": "collines volcaniques",
+      "rang": "F",
+      "culture": "ardannais",
+      "connu": true,
+      "description": "Collines de scories et de vignes noires, cœur des forges d'Ardanne."
+    },
+    {
+      "id": "reg_cotes_de_sel",
+      "nom": "Côtes de Sel",
+      "biome": "littoral et marais salants",
+      "rang": "E",
+      "culture": "salant",
+      "connu": true,
+      "description": "Marais blancs, ports de pêche, brumes épaisses."
+    },
+    {
+      "id": "reg_landes_vitrees",
+      "nom": "Landes vitrées",
+      "biome": "lande vitrifiée",
+      "rang": "D",
+      "culture": "ardannais",
+      "connu": true,
+      "description": "Plaine fondue par une ancienne brèche ; le sol y coupe les bottes."
+    },
+    {
+      "id": "reg_val_des_cendres",
+      "nom": "Val des Cendres",
+      "biome": "forêt de pins brûlés",
+      "rang": "E",
+      "culture": "ardannais",
+      "connu": true
+    },
+    {
+      "id": "reg_crocs_d_hiver",
+      "nom": "Crocs d'Hiver",
+      "biome": "montagnes glacées",
+      "rang": "C",
+      "culture": "ancien",
+      "connu": false,
+      "secret": "La Forge-sans-Flamme est cachée dans le troisième col."
+    }
+  ],
+  "fronts": [
+    {
+      "id": "frt_monopole_du_sel",
+      "nom": "Le monopole du Sel",
+      "source": "fac_compagnie_du_sel_8d3e",
+      "segments": 6,
+      "rempli": 3,
+      "dernier_tick_jour": 35,
+      "connu": true,
+      "secret": "Plein : la Compagnie interdit toute exploitation libre des brèches de la côte et met à prix les chasseurs sans licence."
+    },
+    {
+      "id": "frt_dette_des_marees",
+      "nom": "La dette des Marées",
+      "source": "fac_marees_noires_77b0",
+      "segments": 4,
+      "rempli": 1,
+      "dernier_tick_jour": 35,
+      "connu": true,
+      "secret": "Plein : les Marées Noires réclament Dorran — mort ou vif."
+    },
+    {
+      "id": "frt_reveil_du_roi",
+      "nom": "Le réveil du Roi-sous-Verre",
+      "source": "menace",
+      "segments": 8,
+      "rempli": 2,
+      "dernier_tick_jour": 35,
+      "connu": false,
+      "secret": "Chaque segment : une brèche de verre s'ouvre. Plein : le Roi se lève dans les Landes vitrées."
+    }
+  ],
+  "arc": {
+    "acte_courant": 2,
+    "actes": [
+      {
+        "numero": 1,
+        "nom": "Éveil",
+        "jalons": [
+          {
+            "id": "jal_systeme_apparait",
+            "titre": "Le Système se manifeste",
+            "atteint": true,
+            "jour": 2
+          },
+          {
+            "id": "jal_premier_mentor",
+            "titre": "Un premier maître",
+            "atteint": true,
+            "jour": 2
+          },
+          {
+            "id": "jal_premiere_arme",
+            "titre": "Une première arme",
+            "atteint": true,
+            "jour": 3
+          }
+        ]
+      },
+      {
+        "numero": 2,
+        "nom": "Ascension",
+        "jalons": [
+          {
+            "id": "jal_premiere_breche",
+            "titre": "Fermer une brèche",
+            "atteint": true,
+            "jour": 31
+          },
+          {
+            "id": "jal_terre_a_soi",
+            "titre": "Une terre à soi",
+            "atteint": true,
+            "jour": 35
+          },
+          {
+            "id": "jal_premiere_unique",
+            "titre": "Une arme Unique de ta main",
+            "atteint": true,
+            "jour": 39
+          },
+          {
+            "id": "jal_rang_d",
+            "titre": "Le rang D",
+            "atteint": false,
+            "secret": "Fermer la brèche des Crocs d'Écume avant son débordement."
+          }
+        ]
+      },
+      {
+        "numero": 3,
+        "nom": "Fondation",
+        "jalons": [
+          {
+            "id": "jal_village",
+            "titre": "Hautebrande devient village",
+            "atteint": false
+          },
+          {
+            "id": "jal_choix_faction",
+            "titre": "Choisir ses alliés",
+            "atteint": false,
+            "secret": "Le Cercle propose une alliance formelle si la réputation dépasse 50."
+          }
+        ]
+      },
+      {
+        "numero": 4,
+        "nom": "Guerre",
+        "jalons": [
+          {
+            "id": "jal_premier_siege",
+            "titre": "???",
+            "atteint": false
+          }
+        ]
+      },
+      {
+        "numero": 5,
+        "nom": "Destinée",
+        "jalons": [
+          {
+            "id": "jal_verite_systeme",
+            "titre": "???",
+            "atteint": false
+          }
+        ]
+      }
+    ]
+  },
+  "secrets": {
+    "menace": {
+      "nom": "Le Roi-sous-Verre",
+      "antagoniste": "Un forgeron de l'âge d'avant, devenu cristal en voulant forger le Système",
+      "plan": [
+        "Ouvrir des brèches de verre",
+        "Récupérer les fragments de son cœur",
+        "Briser la Forge-sans-Flamme",
+        "Se lever dans les Landes vitrées"
+      ],
+      "etape_courante": 2
+    },
+    "mystere_systeme": {
+      "titre": "La Dernière Forge",
+      "revelation": "Le Système est une arme forgée il y a trois siècles pour contenir le Roi-sous-Verre ; elle choisit des forgerons pour se réparer.",
+      "indices_semes": [
+        "La voix du Système résonne comme un marteau (session 1)",
+        "Les brèches de verre fuient les forges allumées (session 7)"
+      ]
+    },
+    "classes_cachees": [
+      {
+        "id": "cls_lame_de_l_enclume_ardente",
+        "nom": "Lame de l'Enclume Ardente",
+        "rang": "Legendaire",
+        "conditions": [
+          {
+            "texte": "Forger soi-même une arme Rare ou mieux et vaincre avec elle un ennemi de rang supérieur",
+            "remplie": true
+          },
+          {
+            "texte": "Lancer 50 sorts canalisés à travers une arme",
+            "remplie": false
+          },
+          {
+            "texte": "Gagner la reconnaissance de Hauldren Sans-Flamme",
+            "remplie": false
+          },
+          {
+            "texte": "Atteindre Maîtrise de forge 5 et Enchantement 3",
+            "remplie": false
+          }
+        ]
+      }
+    ],
+    "pnj_roles": {
+      "pnj_varek_ombrelune_44f0": "informateur du Cercle",
+      "pnj_orvan_braisier_a1c4": "héritier indirect de Hauldren"
+    },
+    "materiaux_legendaires": [
+      {
+        "id": "mat_cristal_du_roi",
+        "nom": "Cristal du Roi",
+        "ou": "cœur du Roi-sous-Verre"
+      }
+    ],
+    "stats_cachees_inedites": [
+      "Tenacite"
+    ]
+  }
+}

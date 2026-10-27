@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://enclume.local/schemas/partie.schema.json",
+  "title": "partie.json — méta d'une partie",
+  "type": "object",
+  "required": ["schema_version", "id", "nom", "heros", "graine", "mode_mort", "statut", "session", "calendrier", "lieu_actuel", "cree_le", "maj_le"],
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": { "$ref": "commun.schema.json#/$defs/schema_version" },
+    "id": { "$ref": "commun.schema.json#/$defs/id_partie" },
+    "nom": { "type": "string", "minLength": 1 },
+    "heros": { "type": "string", "minLength": 1 },
+    "graine": { "type": "integer" },
+    "mode_mort": { "enum": ["permadeath", "penalite"] },
+    "statut": { "enum": ["en_cours", "terminee"] },
+    "session": { "description": "Numéro de la dernière session sauvegardée (0 avant la première).", "type": "integer", "minimum": 0 },
+    "calendrier": { "$ref": "commun.schema.json#/$defs/date_jeu" },
+    "lieu_actuel": { "$ref": "commun.schema.json#/$defs/id_lieu" },
+    "morts": { "description": "Nombre de morts subies (mode pénalité).", "type": "integer", "minimum": 0 },
+    "cree_le": { "$ref": "commun.schema.json#/$defs/horodatage" },
+    "maj_le": { "$ref": "commun.schema.json#/$defs/horodatage" }
+  }
+}

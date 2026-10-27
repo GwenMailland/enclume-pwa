@@ -1,0 +1,22 @@
+{
+  "schema_version": 1,
+  "parties": [
+    {
+      "id": "partie-demo",
+      "nom": "Les Braises d'Ardanne",
+      "heros": "Aldric",
+      "niveau": 7,
+      "classe": "Lame errante",
+      "lieu": "Hautebrande",
+      "statut": "en_cours",
+      "session": 9,
+      "date": {
+        "annee": 1,
+        "saison": "automne",
+        "jour": 41,
+        "moment": "crepuscule"
+      },
+      "maj_le": "2026-10-26T21:40:00Z"
+    }
+  ]
+}
