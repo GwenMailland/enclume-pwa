@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Tests — Enclume PWA</title>
+  <style>
+    body { background: #14110f; color: #e8dcc4; font: 14px/1.5 -apple-system, system-ui, sans-serif; margin: 16px; }
+    h1 { font-size: 20px; }
+    .ok { color: #6fbf73; }
+    .ko { color: #d9534f; font-weight: 700; }
+    li { margin: 2px 0; }
+    #bilan { font-size: 16px; font-weight: 700; margin: 12px 0; }
+  </style>
+</head>
+<body>
+  <h1>Tests unitaires — filtre, règles, JSONL, markdown</h1>
+  <p>Ouvrir via un serveur HTTP à la racine du repo (ex. <code>python3 -m http.server</code>, puis <code>/tests/tests.html</code>).</p>
+  <div id="bilan">En cours…</div>
+  <ul id="resultats"></ul>
+  <script type="module">
+    import { filtrer, parserJsonl, cheminInterdit } from "../js/filtre.js";
+    import * as R from "../js/regles.js";
+    import { rendreMarkdown } from "../js/markdown.js";
+    import { FICHIERS_PARTIE, FICHIERS_JSONL } from "../js/donnees.js";
+
+    const $r = document.getElementById("resultats");
+    let ok = 0, ko = 0;
+    function test(nom, condition, detail = "") {
+      const li = document.createElement("li");
+      li.className = condition ? "ok" : "ko";
+      li.textContent = `${condition ? "✓" : "✗"} ${nom}${!condition && detail ? ` — ${detail}` : ""}`;
+      $r.append(li);
+      condition ? ok++ : ko++;
+    }
+    const egal = (nom, obtenu, attendu) => test(nom, JSON.stringify(obtenu) === JSON.stringify(attendu), `obtenu ${JSON.stringify(obtenu)}, attendu ${JSON.stringify(attendu)}`);
+
+    // Parcours récursif : liste des violations restantes après filtrage.
+    function violations(v, chemin = "$", parent = null) {
+      const sortie = [];
+      if (Array.isArray(v)) v.forEach((x, i) => sortie.push(...violations(x, `${chemin}[${i}]`)));
+      else if (v && typeof v === "object") {
+        if (v.connu === false) sortie.push(`${chemin} connu:false`);
+        if (parent === "stats_cachees" && v.debloquee === false) sortie.push(`${chemin} stat cachée verrouillée`);
+        for (const [k, x] of Object.entries(v)) {
+          if (k === "secret" || k === "secrets") sortie.push(`${chemin}.${k}`);
+          sortie.push(...violations(x, `${chemin}.${k}`, k));
+        }
+      }
+      return sortie;
+    }
+
+    // Toutes les chaînes « secrètes » de la démo brute (valeurs sous secret/secrets,
+    // et noms des entrées connu:false) ne doivent plus apparaître après filtrage.
+    function chainesSecretes(v, sortie = new Set(), sousSecret = false) {
+      if (typeof v === "string") { if (sousSecret && v.length > 3) sortie.add(v); }
+      else if (Array.isArray(v)) v.forEach((x) => chainesSecretes(x, sortie, sousSecret));
+      else if (v && typeof v === "object") {
+        if (v.connu === false && v.nom) sortie.add(v.nom);
+        for (const [k, x] of Object.entries(v)) chainesSecretes(x, sortie, sousSecret || k === "secret" || k === "secrets");
+      }
+      return sortie;
+    }
+
+    // ---------- Filtre : cas unitaires ----------
+    egal("supprime secret / secrets récursivement", filtrer({ a: 1, secret: "x", b: { secrets: { y: 1 }, c: [{ secret: 2, d: 3 }] } }), { a: 1, b: { c: [{ d: 3 }] } });
+    egal("supprime les entrées connu:false dans les listes", filtrer({ l: [{ id: 1, connu: true }, { id: 2, connu: false }, { id: 3 }] }), { l: [{ id: 1, connu: true }, { id: 3 }] });
+    egal("supprime les valeurs connu:false dans les objets", filtrer({ x: { connu: false }, y: { connu: true } }), { y: { connu: true } });
+    egal("supprime les stats cachées verrouillées", filtrer({ stats_cachees: { A: { debloquee: true, valeur: 1 }, B: { debloquee: false, valeur: 2 } } }), { stats_cachees: { A: { debloquee: true, valeur: 1 } } });
+    egal("ne touche pas ville.debloquee:false", filtrer({ debloquee: false, nom: "X" }), { debloquee: false, nom: "X" });
+    egal("secret sous forme de liste ou d'objet", filtrer([{ secret: ["a"], n: 1 }, { secret: { a: 1 }, n: 2 }]), [{ n: 1 }, { n: 2 }]);
+    egal("valeurs scalaires intactes", filtrer({ n: 0, s: "", b: false, z: null }), { n: 0, s: "", b: false, z: null });
+    test("memoire.md interdit", cheminInterdit("parties/x/memoire.md"));
+    test("bugs.md interdit (avec ?ref)", cheminInterdit("parties/x/bugs.md?ref=main"));
+    test("perso.json autorisé", !cheminInterdit("parties/x/perso.json"));
+
+    // ---------- JSONL ----------
+    egal("parse JSONL ligne à ligne, ignore vides et lignes cassées", parserJsonl('{"a":1}\n\n{cassé\r\n{"a":2,"secret":"s"}\n{"a":3,"connu":false}\n'), [{ a: 1 }, { a: 2 }]);
+    egal("JSONL vide", parserJsonl(""), []);
+
+    // ---------- Règles (GDD §3.1, §3.2, §3.4, §3.5) ----------
+    egal("mod 8 → 0", R.modificateur(8), 0);
+    egal("mod 15 → +2", R.modificateur(15), 2);
+    egal("mod 50 → +9", R.modificateur(50), 9);
+    egal("mod 100 → +19", R.modificateur(100), 19);
+    egal("mod 4 → −1", R.modificateur(4), -1);
+    egal("PV max END 14 niv 7", R.pvMax(14, 7), 97);
+    egal("PM max INT 15 VOL 11", R.pmMax(15, 11), 51);
+    egal("Endurance END 14", R.enduranceMax(14), 8);
+    egal("Défense AGI 14 armure 3", R.defense(14, 3), 14);
+    egal("Initiative AGI 14 DEX 19", R.initiative(14, 19), 3);
+    egal("Charge FOR 15", R.chargeMax(15), 45);
+    egal("Seuil XP niveau 1", R.seuilXp(1), 100);
+    egal("Seuil XP niveau 7", R.seuilXp(7), 1852);
+    egal("Seuil d'usage DEX 19", R.seuilUsage(19), 29);
+    egal("bilan des jets", R.bilanJets([{ degre: "succes" }, { degre: "critique" }, { degre: "echec" }, { degre: "fiasco" }, { type: "degats" }]), { total: 5, evalues: 4, reussis: 2, taux: 50, critiques: 1, fiascos: 1 });
+
+    // ---------- Markdown ----------
+    const md = rendreMarkdown("# Titre\n\nTexte **gras** <script>alert(1)<\/script>\n\n- un\n- deux");
+    test("markdown : le HTML est échappé", !md.querySelector("script") && md.textContent.includes("<script>"));
+    test("markdown : gras, liste", md.querySelector("strong")?.textContent === "gras" && md.querySelectorAll("li").length === 2);
+
+    // ---------- Filtre sur toute la démo ----------
+    const base = "../demo/parties/";
+    const index = await (await fetch(base + "index.json")).json();
+    for (const p of index.parties) {
+      const fichiers = [...Object.values(FICHIERS_PARTIE), ...Object.values(FICHIERS_JSONL)];
+      const bruts = [], filtres = [];
+      for (const f of fichiers) {
+        const rep = await fetch(`${base}${p.id}/${f}`);
+        if (!rep.ok) { test(`${p.id}/${f} présent`, false, String(rep.status)); continue; }
+        const texte = await rep.text();
+        const brut = f.endsWith(".jsonl") ? texte.split("\n").filter((l) => l.trim()).map((l) => JSON.parse(l)) : JSON.parse(texte);
+        const filtre = f.endsWith(".jsonl") ? parserJsonl(texte) : filtrer(brut);
+        bruts.push(brut); filtres.push(filtre);
+        const v = violations(filtre);
+        test(`démo ${p.id}/${f} : aucun secret ni connu:false`, v.length === 0, v.join(", "));
+      }
+      const secrets = chainesSecretes(bruts);
+      const visible = JSON.stringify(filtres);
+      const fuites = [...secrets].filter((s) => visible.includes(s));
+      test(`démo ${p.id} : ${secrets.size} chaînes secrètes, aucune ne subsiste`, secrets.size > 0 && fuites.length === 0, fuites.join(" | "));
+      test(`démo ${p.id} : la stat cachée verrouillée a disparu`, !visible.includes("Tenacite") && !visible.includes("Ténacité"));
+      test(`démo ${p.id} : la stat débloquée reste`, visible.includes("Résonance"));
+    }
+    egal("index filtré : pas de violation", violations(filtrer(index)), []);
+
+    document.getElementById("bilan").textContent = `${ok} réussis, ${ko} échoués`;
+    document.getElementById("bilan").className = ko ? "ko" : "ok";
+    document.title = ko ? `✗ ${ko} échec(s)` : `✓ ${ok} tests`;
+  </script>
+</body>
+</html>

@@ -1,0 +1,77 @@
+/* Design tokens — Chroniques de l'Enclume (spec §5). Thème sombre uniquement. */
+:root {
+  color-scheme: dark;
+
+  /* Parchemin et encre */
+  --fond: #14110f;
+  --surface: #1d1916;
+  --surface-2: #26201b;
+  --trait: #3a322a;
+  --texte: #e8dcc4;
+  --texte-2: #a89a82;
+  --texte-3: #7d715f;
+  --cuivre: #c8833a;
+  --cuivre-clair: #e0a15e;
+  --cuivre-sombre: #7a4d20;
+
+  /* Fenêtres Système */
+  --sys-fond: #0d1520;
+  --sys-fond-2: #122031;
+  --sys-bord: rgba(63, 167, 214, 0.6);
+  --sys-bord-plein: #3fa7d6;
+  --sys-lueur: 0 0 12px rgba(63, 167, 214, 0.18);
+  --sys-texte: #d6ecf7;
+  --sys-texte-2: #8fb6cb;
+
+  /* Qualités */
+  --q-ordinaire: #b9b2a6;
+  --q-fine: #6fbf73;
+  --q-rare: #4f9de0;
+  --q-epique: #a46be0;
+  --q-unique: #e0a23f;
+  --q-legendaire: #e05a3f;
+
+  /* États */
+  --ok: #6fbf73;
+  --alerte: #e0a23f;
+  --danger: #d9534f;
+  --pv: #c0453a;
+  --pm: #4f7fe0;
+  --endu: #d9b13a;
+
+  /* Typographie */
+  --f-titre: "Cormorant Garamond", "EB Garamond", Georgia, serif;
+  --f-recit: "EB Garamond", Georgia, serif;
+  --f-ui: -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+  --f-mono: "JetBrains Mono", ui-monospace, "SF Mono", Menlo, monospace;
+
+  --t-xs: 0.75rem;
+  --t-s: 0.875rem;
+  --t-m: 1rem;
+  --t-l: 1.25rem;
+  --t-xl: 1.625rem;
+  --t-xxl: 2.125rem;
+
+  /* Espacements */
+  --e-1: 4px;
+  --e-2: 8px;
+  --e-3: 12px;
+  --e-4: 16px;
+  --e-5: 24px;
+  --e-6: 32px;
+  --gouttiere: 16px;
+
+  --rayon: 10px;
+  --rayon-s: 6px;
+  --coin: 10px; /* coins coupés des fenêtres Système */
+  --tactile: 44px;
+
+  --entete-h: 52px;
+  --onglets-h: 58px;
+  --sa-haut: env(safe-area-inset-top, 0px);
+  --sa-bas: env(safe-area-inset-bottom, 0px);
+  --sa-gauche: env(safe-area-inset-left, 0px);
+  --sa-droite: env(safe-area-inset-right, 0px);
+
+  --apparition: 150ms;
+}

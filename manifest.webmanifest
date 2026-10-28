@@ -1,0 +1,17 @@
+{
+  "name": "Chroniques de l'Enclume",
+  "short_name": "Enclume",
+  "description": "Compagnon en lecture seule des parties des Chroniques de l'Enclume.",
+  "lang": "fr",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#14110f",
+  "theme_color": "#14110f",
+  "icons": [
+    { "src": "icons/icone-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "icons/icone-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any maskable" },
+    { "src": "icons/icone.svg", "sizes": "any", "type": "image/svg+xml" }
+  ]
+}
