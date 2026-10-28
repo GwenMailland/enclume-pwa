@@ -37,7 +37,7 @@
     "saison": { "enum": ["printemps", "ete", "automne", "hiver"] },
     "moment": { "enum": ["aube", "matin", "midi", "apres_midi", "crepuscule", "nuit"] },
     "date_jeu": {
-      "description": "Date du jeu. `jour` est absolu (compteur depuis le début de la partie, à partir de 1).",
+      "description": "Date du jeu. `jour` est absolu (compteur depuis le début de la partie, à partir de 1). `heure` (optionnelle, 0-23) garde les heures en reste ; `moment` reste la référence d'affichage.",
       "type": "object",
       "required": ["annee", "saison", "jour", "moment"],
       "additionalProperties": false,
@@ -45,7 +45,8 @@
         "annee": { "type": "integer", "minimum": 1 },
         "saison": { "$ref": "#/$defs/saison" },
         "jour": { "type": "integer", "minimum": 1 },
-        "moment": { "$ref": "#/$defs/moment" }
+        "moment": { "$ref": "#/$defs/moment" },
+        "heure": { "type": "integer", "minimum": 0, "maximum": 23 }
       }
     },
     "jour": { "type": "integer", "minimum": 1 },

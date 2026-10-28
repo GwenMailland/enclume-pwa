@@ -26,6 +26,12 @@
         "allegeance:fac_compagnie_du_sel_8d3e",
         "contrat:armes_compagnie_du_sel"
       ],
+      "libelles": {
+        "allegeance:fac_cercle_des_cendres_2a71": "Allégeance : Cercle des Cendres",
+        "rang:cercle_jure": "Rang : Cercle juré",
+        "allegeance:fac_compagnie_du_sel_8d3e": "Allégeance : Compagnie du Sel",
+        "contrat:armes_compagnie_du_sel": "Contrat d'armes de la Compagnie du Sel"
+      },
       "refs": [
         "fac_cercle_des_cendres_2a71",
         "fac_compagnie_du_sel_8d3e",

@@ -174,6 +174,24 @@
       "type": "lieu",
       "ref": "lieu_vel_ardhan_08aa",
       "connu": true
+    },
+    {
+      "nom": "Rat de cendre",
+      "type": "ennemi",
+      "ref": "ene_rat_de_cendre",
+      "connu": true
+    },
+    {
+      "nom": "Loup vitré",
+      "type": "ennemi",
+      "ref": "ene_loup_vitre",
+      "connu": true
+    },
+    {
+      "nom": "Éclat errant",
+      "type": "ennemi",
+      "ref": "ene_eclat_errant",
+      "connu": true
     }
   ]
 }

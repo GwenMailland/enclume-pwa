@@ -7,6 +7,12 @@
   "required": ["schema_version", "choix", "verrous"],
   "additionalProperties": false,
   "$defs": {
+    "libelles": {
+      "description": "Libellé d'affichage (accentué) d'un jeton de `ouvre` / `verrouille`, ex. {\"rang:cercle_jure\": \"Rang : Cercle juré\"}. Optionnel : à défaut, l'affichage dérive du slug.",
+      "type": "object",
+      "propertyNames": { "$ref": "#/$defs/jeton" },
+      "additionalProperties": { "type": "string", "minLength": 1 }
+    },
     "jeton": { "type": "string", "pattern": "^[a-z_]+:[a-z0-9_]+$" }
   },
   "properties": {
@@ -28,6 +34,7 @@
           "session": { "type": "integer", "minimum": 1 },
           "ouvre": { "type": "array", "items": { "$ref": "#/$defs/jeton" } },
           "verrouille": { "type": "array", "items": { "$ref": "#/$defs/jeton" } },
+          "libelles": { "$ref": "#/$defs/libelles" },
           "refs": { "type": "array", "items": { "$ref": "commun.schema.json#/$defs/id_ref" } }
         }
       }

@@ -204,6 +204,7 @@
         "id": "cls_lame_de_l_enclume_ardente",
         "nom": "Lame de l'Enclume Ardente",
         "rang": "Legendaire",
+        "gabarit": "cls_lame_forge",
         "conditions": [
           {
             "texte": "Forger soi-même une arme Rare ou mieux et vaincre avec elle un ennemi de rang supérieur",

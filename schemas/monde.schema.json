@@ -99,6 +99,7 @@
               "id": { "$ref": "commun.schema.json#/$defs/id_cls" },
               "nom": { "type": "string" },
               "rang": { "$ref": "commun.schema.json#/$defs/rang_classe" },
+              "gabarit": { "$ref": "commun.schema.json#/$defs/id_cls", "description": "Id du gabarit dans contenus/classes.json (compétences, passifs, bonus). Le nom propre au monde est `nom`." },
               "conditions": {
                 "type": "array",
                 "items": {

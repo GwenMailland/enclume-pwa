@@ -8,7 +8,8 @@
   "additionalProperties": false,
   "properties": {
     "schema_version": { "$ref": "commun.schema.json#/$defs/schema_version" },
-    "maitrise_xp": { "type": "integer", "minimum": 0 },
+    "maitrise_xp": { "type": "integer", "minimum": 0, "description": "XP cumulée. Niveau L atteint à 25·L·(L−1) (ARCHITECTURE §3.1)." },
+    "enchantement_xp": { "type": "integer", "minimum": 0, "description": "XP cumulée du métier Enchantement (niveau dans perso.json > metiers.enchantement), même barème que la Maîtrise. Absent = 0." },
     "enclume": {
       "description": "Outil personnel (GDD §9.1).",
       "type": "object",

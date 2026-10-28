@@ -11,7 +11,8 @@
     "annee": 1,
     "saison": "automne",
     "jour": 41,
-    "moment": "crepuscule"
+    "moment": "crepuscule",
+    "heure": 18
   },
   "lieu_actuel": "lieu_hautebrande_6d02",
   "morts": 1,

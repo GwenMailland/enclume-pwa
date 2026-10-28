@@ -1,0 +1,111 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://enclume.local/schemas/contenus/origines.schema.json",
+  "title": "contenus/origines.json",
+  "description": "Métiers d'origine (GDD §6.1), lus par `moteur nouvelle`. Une entrée par valeur de perso.json > origine. Champs listés requis ; champs supplémentaires tolérés.",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "entrees"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "$ref": "../commun.schema.json#/$defs/schema_version"
+    },
+    "entrees": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "nom",
+          "description",
+          "metiers",
+          "competence",
+          "mentor"
+        ],
+        "properties": {
+          "id": {
+            "description": "Même valeur que perso.json > origine.",
+            "$ref": "../perso.schema.json#/properties/origine"
+          },
+          "nom": {
+            "type": "string",
+            "minLength": 1
+          },
+          "description": {
+            "type": "string",
+            "minLength": 1
+          },
+          "metiers": {
+            "description": "Niveaux de métier de départ, ex. {\"forge\": 1}.",
+            "type": "object",
+            "additionalProperties": {
+              "type": "integer",
+              "minimum": 1
+            }
+          },
+          "competence": {
+            "description": "Compétence de départ (contenus/competences.json), ou null.",
+            "oneOf": [
+              { "type": "null" },
+              { "$ref": "../commun.schema.json#/$defs/id_cmp" }
+            ]
+          },
+          "mentor": {
+            "description": "Rôle du PNJ lié, généré à la création (ex. « maître forgeron »).",
+            "type": "string",
+            "minLength": 1
+          },
+          "recette": {
+            "description": "Recette de départ (source « origine »).",
+            "type": "object",
+            "required": [
+              "id",
+              "nom",
+              "type",
+              "materiaux"
+            ],
+            "properties": {
+              "id": {
+                "$ref": "../commun.schema.json#/$defs/id_rec"
+              },
+              "nom": {
+                "type": "string",
+                "minLength": 1
+              },
+              "type": {
+                "$ref": "../commun.schema.json#/$defs/type_objet"
+              },
+              "heures": {
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 12
+              },
+              "materiaux": {
+                "type": "array",
+                "minItems": 1,
+                "items": {
+                  "$ref": "../commun.schema.json#/$defs/quantite_materiau"
+                }
+              }
+            }
+          },
+          "materiaux": {
+            "description": "Matériaux de départ (même forme que inventaire.json > materiaux).",
+            "$ref": "../inventaire.schema.json#/properties/materiaux"
+          },
+          "objets": {
+            "description": "Objets de départ, ajoutés comme par l'op `objet_ajout`.",
+            "type": "array",
+            "items": {
+              "$ref": "../inventaire.schema.json#/$defs/objet_brut"
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -4,10 +4,18 @@ Format : `- [ ] pwa-ui → architecte : <besoin> (raison)`
 
 ## Ouvertes
 
-- [ ] pwa-ui → architecte : préciser si `perso.stats` inclut déjà les bonus de classe, de titres actifs et d'équipement (raison : la PWA affiche la valeur stockée et calcule les dérivées sur « stockée + bonus » ; si la valeur stockée est déjà effective, il y a double comptage).
-- [ ] pwa-ui → architecte : ajouter un libellé d'affichage aux effets de `destinee.json > choix[].ouvre / verrouille` (ex. `{"cle": "rang:cercle_jure", "libelle": "Rang : Cercle juré"}`) (raison : les slugs ASCII perdent les accents ; la PWA affiche aujourd'hui « Rang : cercle jure »).
-- [ ] pwa-ui → architecte : donner le seuil d'XP de Maîtrise de forge (formule GDD ou champ `forge.json > maitrise_seuil`) (raison : afficher une barre de progression comme pour l'XP de niveau).
-- [ ] pwa-ui → architecte : préciser l'échelle des jauges `ville.jauges.defense` et `renommee` (0-100 comme le moral ?) (raison : la PWA les affiche sur 100 par défaut).
-- [ ] pwa-ui → architecte : lister les sessions (ex. `journal/sessions/index.json`) ou garantir que `NNN.md` existe pour 1…`partie.session` (raison : sans listing, la PWA tente 001 à N et ignore les 404).
+- [ ] architecte → pwa-ui : suivre le contrat synchronisé (enclume 0a0c8d6) :
+  - destinée : afficher `choix[].libelles[jeton]` quand il existe, sinon le slug traduit comme aujourd'hui ;
+  - forge : barre de progression de Maîtrise avec le seuil 25·L·(L−1) sur l'XP **cumulée** `maitrise_xp` ; idem Enchantement avec `enchantement_xp` (absent = 0) et `perso.metiers.enchantement` ;
+  - ville : `defense`, `renommee` et `population` en valeur brute (pas « /100 ») ; seul `moral` est sur 100 ;
+  - sessions : lire 001…`partie.session` (invariant garanti) ;
+  - `date.heure` (optionnelle) peut s'afficher à côté du moment ;
+  - `monde.secrets.classes_cachees[].gabarit` est sous `secrets` : jamais affiché (le filtre le couvre déjà).
 
 ## Traitées
+
+- [x] pwa-ui → architecte : `perso.stats` contient les valeurs **de base**, sans bonus. Effective = base + bonus de classe, titres actifs, objets équipés et leurs affixes : ton calcul « stockée + bonus » est le bon, sans double comptage. (enclume 0a0c8d6 ; schéma `perso` et ARCHITECTURE §3.1)
+- [x] pwa-ui → architecte : libellés des effets de destinée — champ optionnel `destinee.json > choix[].libelles` (jeton → libellé accentué). La fixture en porte. (enclume 0a0c8d6)
+- [x] pwa-ui → architecte : seuil de Maîtrise de forge — niveau L atteint à **25·L·(L−1)** XP cumulée (L2 = 50, L3 = 150, L4 = 300, L5 = 500), sur `forge.json > maitrise_xp`. Le niveau stocké dans `perso.metiers.forge` fait foi. (ARCHITECTURE §3.1)
+- [x] pwa-ui → architecte : échelle des jauges — `moral` sur 0-100 ; `population`, `defense` et `renommee` sont des entiers ≥ 0 sans plafond. `defense` est la part hors bâtiments. (ARCHITECTURE §3.1)
+- [x] pwa-ui → architecte : sessions — invariant : `journal/sessions/NNN.md` existe pour 1…`partie.session` ; pas d'index. Vérifié par le test de la fixture et, bientôt, par `moteur valider`. (ARCHITECTURE §3.1)

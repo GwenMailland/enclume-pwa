@@ -14,7 +14,8 @@
         "annee": 1,
         "saison": "automne",
         "jour": 41,
-        "moment": "crepuscule"
+        "moment": "crepuscule",
+        "heure": 18
       },
       "maj_le": "2026-10-26T21:40:00Z"
     }

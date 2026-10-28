@@ -1,6 +1,7 @@
 {
   "schema_version": 1,
   "maitrise_xp": 260,
+  "enchantement_xp": 30,
   "enclume": {
     "nom": "Enclume de Hautebrande",
     "bonus": 1

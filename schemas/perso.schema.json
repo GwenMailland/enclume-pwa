@@ -30,7 +30,7 @@
     "xp": { "type": "integer", "minimum": 0 },
     "points_stat": { "type": "integer", "minimum": 0 },
     "points_competence": { "type": "integer", "minimum": 0 },
-    "stats": { "$ref": "#/$defs/sept_stats" },
+    "stats": { "description": "Valeurs de BASE, sans les bonus de classe, de titres actifs ni d'équipement. Valeur effective = base + somme des `bonus` actifs (calculée par le moteur et la PWA).", "$ref": "#/$defs/sept_stats" },
     "usage": { "description": "Compteurs d'usage (GDD §3.5). +1 quand le compteur atteint 10 + valeur.", "$ref": "#/$defs/sept_stats" },
     "stats_cachees": {
       "description": "Clé = identifiant ASCII (ex. Resonance). Invisibles tant que `debloquee` est false (GDD §3.3).",

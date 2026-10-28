@@ -23,7 +23,8 @@
             "codex_upsert", "affinite", "souvenir", "reputation",
             "quete", "lieu", "evenement",
             "titre", "classe", "stat_cachee", "malus",
-            "destinee", "jalon", "ville", "statut"
+            "destinee", "jalon", "ville", "statut",
+            "condition_classe", "systeme"
           ]
         }
       },
@@ -51,7 +52,9 @@
         { "if": { "properties": { "op": { "const": "destinee" } } }, "then": { "$ref": "#/$defs/op_destinee" } },
         { "if": { "properties": { "op": { "const": "jalon" } } }, "then": { "$ref": "#/$defs/op_jalon" } },
         { "if": { "properties": { "op": { "const": "ville" } } }, "then": { "$ref": "#/$defs/op_ville" } },
-        { "if": { "properties": { "op": { "const": "statut" } } }, "then": { "$ref": "#/$defs/op_statut" } }
+        { "if": { "properties": { "op": { "const": "statut" } } }, "then": { "$ref": "#/$defs/op_statut" } },
+        { "if": { "properties": { "op": { "const": "condition_classe" } } }, "then": { "$ref": "#/$defs/op_condition_classe" } },
+        { "if": { "properties": { "op": { "const": "systeme" } } }, "then": { "$ref": "#/$defs/op_systeme" } }
       ]
     },
 
@@ -231,6 +234,7 @@
         "alternatives": { "type": "array", "items": { "type": "string" } },
         "ouvre": { "type": "array", "items": { "$ref": "destinee.schema.json#/$defs/jeton" } },
         "verrouille": { "type": "array", "items": { "$ref": "destinee.schema.json#/$defs/jeton" } },
+        "libelles": { "$ref": "destinee.schema.json#/$defs/libelles" },
         "refs": { "type": "array", "items": { "$ref": "commun.schema.json#/$defs/id_ref" } }
       }
     },
@@ -262,6 +266,50 @@
       "description": "Fin de partie (permadeath) ou reprise.",
       "type": "object", "required": ["op", "valeur"], "additionalProperties": false,
       "properties": { "op": true, "valeur": { "enum": ["en_cours", "terminee"] }, "raison": { "type": "string" } }
+    },
+    "op_condition_classe": {
+      "description": "Coche une condition secrète de monde.json > secrets.classes_cachees[classe].conditions[], désignée par `index` (0-based) ou par `texte` exact. Irréversible (seul `remplie: true`).",
+      "type": "object", "required": ["op", "classe", "remplie"], "additionalProperties": false,
+      "properties": {
+        "op": true,
+        "classe": { "$ref": "commun.schema.json#/$defs/id_cls" },
+        "index": { "type": "integer", "minimum": 0 },
+        "texte": { "type": "string", "minLength": 1 },
+        "remplie": { "const": true },
+        "raison": { "type": "string" }
+      },
+      "oneOf": [ { "required": ["index"] }, { "required": ["texte"] } ]
+    },
+    "op_systeme": {
+      "description": "Le Système (GDD §11), dans systeme.json. breche : maj d'une brèche connue (etat, etage_atteint). penalite : statut de l'épreuve du `jour`. quete : creer (titre, type requis) | terminer | echouer une quête du Système. rang : réévaluation du rang du héros.",
+      "type": "object", "required": ["op", "action"], "additionalProperties": false,
+      "properties": {
+        "op": true,
+        "action": { "enum": ["breche", "penalite", "quete", "rang"] },
+        "id": { "anyOf": [ { "$ref": "commun.schema.json#/$defs/id_brc" }, { "$ref": "commun.schema.json#/$defs/id_qst" } ] },
+        "etat": { "enum": ["ouverte", "en_cours", "fermee", "debordee"] },
+        "etage_atteint": { "type": "integer", "minimum": 0 },
+        "jour": { "$ref": "commun.schema.json#/$defs/jour" },
+        "statut": { "enum": ["a_venir", "subie", "survecue"] },
+        "quete": { "enum": ["creer", "terminer", "echouer"] },
+        "titre": { "type": "string", "minLength": 1 },
+        "type": { "enum": ["urgente", "cachee", "arc"] },
+        "description": { "type": "string" },
+        "echeance_jour": { "$ref": "commun.schema.json#/$defs/jour" },
+        "recompense": { "type": "string" },
+        "echec": { "type": "string" },
+        "valeur": { "$ref": "commun.schema.json#/$defs/rang" },
+        "raison": { "type": "string" }
+      },
+      "allOf": [
+        { "if": { "properties": { "action": { "const": "breche" } } },
+          "then": { "required": ["id"], "properties": { "id": { "$ref": "commun.schema.json#/$defs/id_brc" } }, "anyOf": [ { "required": ["etat"] }, { "required": ["etage_atteint"] } ] } },
+        { "if": { "properties": { "action": { "const": "penalite" } } }, "then": { "required": ["jour", "statut"] } },
+        { "if": { "properties": { "action": { "const": "quete" } } },
+          "then": { "required": ["id", "quete"], "properties": { "id": { "$ref": "commun.schema.json#/$defs/id_qst" } } } },
+        { "if": { "properties": { "action": { "const": "quete" }, "quete": { "const": "creer" } }, "required": ["quete"] }, "then": { "required": ["titre", "type"] } },
+        { "if": { "properties": { "action": { "const": "rang" } } }, "then": { "required": ["valeur"] } }
+      ]
     }
   }
 }
